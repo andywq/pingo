@@ -1,0 +1,48 @@
+/* components/AddProductModal.wxss */
+.add-product-modal {
+  position: fixed;
+  z-index: 2;
+  left: 0;
+  top: 60rpx;
+  margin: 24rpx;
+  width: calc(100% - 48rpx);
+  height: calc(100% - 108rpx);
+  background: #ffffff;
+  border-radius: 24rpx;
+  box-shadow: 0 0 24rpx 0 #3e4685aa;
+  transition: all .5s;
+
+  opacity: 0;
+  pointer-events: none;
+}
+
+
+.add-product-modal.open {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.add-product-modal .actions {
+  display: flex;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  padding: 24rpx;
+  justify-content: space-around;
+  width: 100%;
+}
+.add-product-modal .actions button.close,
+.add-product-modal .actions button.submit {
+  font-weight: 400;
+  border-radius: 24rpx;
+  color: white;
+  font-size: 28rpx;
+  position: relative;
+  z-index: 1;
+  margin: 24rpx;
+  width: 200rpx;
+  background: #3d478555;
+}
+.add-product-modal .actions button.submit {
+  background: #3d4785;
+}

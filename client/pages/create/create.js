@@ -5,7 +5,30 @@ Page({
    * 页面的初始数据
    */
   data: {
+    title: "",
+    products: [],
 
+    isAddModalVisiable: false
+  },
+
+  handleSubmit: function () {
+    console.log("submit", this.data)
+  },
+
+  handleTitleInput: function (e) {
+    this.setData({ title: e.detail.value })
+  },
+
+  handleAddProduct: function() {
+    this.setData({ isAddModalVisiable: true })
+  },
+
+  handleCloseAddModal: function() {
+    this.setData({ isAddModalVisiable: false })
+  },
+  
+  handleSubmitAddModal: function() {
+    this.setData({ isAddModalVisiable: false })
   },
 
   /**

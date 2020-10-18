@@ -1,0 +1,7 @@
+<!--components/AddProductModal.wxml-->
+<view class="add-product-modal {{isOpen ? 'open' : ''}}">
+  <view class="actions">
+    <button class="close" bindtap="handleClose">取消</button>
+    <button class="submit" bindtap="handleSubmit">确定</button>
+  </view>
+</view>
