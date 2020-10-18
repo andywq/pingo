@@ -1,0 +1,87 @@
+/* pages/join/join.wxss */
+page {
+  color: #3d4785;
+  background: #f3f8fe;
+  height: 100%;
+}
+
+.titlebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  background: #f3f8fe;
+  padding: 8rpx 0;
+}
+.titlebar > .title {
+  font-size: 36rpx;
+  margin-left: 24rpx;
+}
+
+.desc {
+  margin-top: 150rpx;
+  text-align: center;
+  width: 100%;
+  font-size: 28rpx;
+  color: #3e468544;
+}
+
+.codes {
+  display: flex;
+  font-size: 24rpx;
+  justify-content: space-evenly;
+  padding: 24rpx;
+  margin-bottom: 24rpx;
+  position: relative;
+}
+.codes input {
+  /* background: blue; */
+  opacity: 0;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 150%;
+  height: 100%;
+  color: transparent; 
+  font-size: 0;
+  margin-left: -50%; text-indent: -999em;
+}
+
+.codes .input-display {
+  position: relative;
+  z-index: 1;
+  width: 100rpx;
+  height: 100rpx;
+  background: white;
+  color: black;
+  font-size: 62rpx;
+  border-radius: 24rpx;
+  text-align: center;
+  line-height: 100rpx;
+  font-family: monospace;
+  text-transform: uppercase;
+  color: #3d4785;
+  font-weight: bold;
+  box-shadow: 0 0 24rpx 0 #3e468533;
+  box-sizing: border-box;
+  pointer-events: none;
+}
+.codes .input-display.selected {
+  box-shadow: 0 0 24rpx 0 #3e468599;
+}
+
+.submit {
+  font-weight: 400;
+  background: #3d4785;
+  border-radius: 24rpx;
+  color: white;
+  font-size: 28rpx;
+  position: relative;
+  z-index: 1;
+}
+
+.submit.disable {
+  background: #3d478533;
+}

@@ -1,0 +1,22 @@
+/* pages/create/create.wxss */
+page {
+  color: #3d4785;
+  background: #f3f8fe;
+  height: 100%;
+}
+
+.titlebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  background: #f3f8fe;
+  padding: 8rpx 0;
+}
+
+.titlebar>.title {
+  font-size: 36rpx;
+  margin-left: 24rpx;
+}

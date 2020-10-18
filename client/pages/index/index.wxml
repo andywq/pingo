@@ -8,7 +8,7 @@
     <text class="title">拼购订单</text>
     <button class="add-btn {{isAddMenuVisiable ? 'open' : ''}}" bindtap="handleToggleAddMenu">+</button>
   </view>
-  <view class="list">
+  <view class="list {{isAddMenuVisiable ? 'blur' : ''}}">
     <view class="order">订单1</view>
     <view class="order">订单1</view>
     <view class="order">订单1</view>

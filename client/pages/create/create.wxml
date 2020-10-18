@@ -1,0 +1,4 @@
+<!--pages/create/create.wxml-->
+<view class="titlebar">
+    <text class="title">发起拼购</text>
+  </view>

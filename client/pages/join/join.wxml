@@ -1,0 +1,20 @@
+<!--pages/join/join.wxml-->
+<view class="container">
+  <view class="titlebar">
+    <text class="title">加入拼购</text>
+  </view>
+
+  <view class="desc">
+    输入拼购订单号：
+  </view>
+  <view class="codes" bindtap="handleFocus">
+    <input type="text" focus value="{{code}}" bindinput="handleInput" />
+    <view wx:key="index" wx:for="{{parts}}" class="input-display {{len == index ? 'selected' : ''}}">
+      {{item}}
+    </view>
+  </view>
+
+  <button class="submit {{len < 6 ? 'disable' : ''}}" bindtap="handleSubmit">
+    {{submitting ? "提交中..." : "点击确认"}}
+  </button>
+</view>

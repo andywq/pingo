@@ -1,16 +1,17 @@
 {
-  "pages":[
+  "pages": [
     "pages/index/index",
-    "pages/logs/logs"
+    "pages/create/create",
+    "pages/join/join"
   ],
-  "window":{
-    "backgroundTextStyle":"light",
+  "window": {
+    "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#f3f8fe",
     "navigationBarTitleText": "Pingo 一起拼购",
-    "navigationBarTextStyle": "black" ,
+    "navigationBarTextStyle": "black",
     "backgroundColor": "#f3f8fe"
   },
   "style": "v2",
-  "sitemapLocation": "sitemap.json"
+  "sitemapLocation": "sitemap.json",
+  "entryPagePath": "pages/join/join"
 }
-
