@@ -20,3 +20,7 @@ page {
   font-size: 36rpx;
   margin-left: 24rpx;
 }
+
+.form {
+  margin-top: 100rpx;
+}
