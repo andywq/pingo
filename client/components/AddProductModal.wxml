@@ -1,5 +1,45 @@
 <!--components/AddProductModal.wxml-->
 <view class="add-product-modal {{isOpen ? 'open' : ''}}">
+
+  <view class="title">添加商品</view>
+
+  <view class="form">
+    <view class="form-item">
+      <view class="form-item-title">商品名称：</view>
+      <view class="form-item-content">
+        <input type="text" value="{{product.name}}" bindinput="handleNameInput"
+          placeholder-class="form-item-input-placeholder" placeholder="如 山东红富士" />
+      </view>
+    </view>
+
+    <view class="form-item">
+      <view class="form-item-title">商品描述：</view>
+      <view class="form-item-content">
+        <input type="text" value="{{product.desc}}" bindinput="handleDescInput"
+          placeholder-class="form-item-input-placeholder" placeholder="如 整箱，毛重约 10kg，约 25 个" />
+      </view>
+    </view>
+
+    <view class="form-item">
+      <view class="form-item-title">商品单价：</view>
+      <view class="form-item-content">
+        <input type="number" value="{{product.unit_price}}" bindblur="handleUnitPriceInput"
+          placeholder-class="form-item-input-placeholder" placeholder="如 18.6" />
+      </view>
+    </view>
+
+    <view class="form-item">
+      <view class="form-item-title">选购模式：</view>
+      <view class="form-item-content">
+        <picker bindchange="handleSelectModeChange" value="{{computed.selectedModeIndex}}" range="{{consts.selectModeNames}}">
+          <view class="picker">
+            {{consts.selectModeNames[computed.selectModeIndex]}}
+          </view>
+        </picker>
+
+      </view>
+    </view>
+  </view>
   <view class="actions">
     <button class="close" bindtap="handleClose">取消</button>
     <button class="submit" bindtap="handleSubmit">确定</button>

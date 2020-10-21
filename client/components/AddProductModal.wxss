@@ -6,11 +6,12 @@
   top: 60rpx;
   margin: 24rpx;
   width: calc(100% - 48rpx);
-  height: calc(100% - 108rpx);
   background: #ffffff;
   border-radius: 24rpx;
   box-shadow: 0 0 24rpx 0 #3e4685aa;
   transition: all .5s;
+  padding: 24rpx 24rpx 150rpx 24rpx;
+  box-sizing: border-box;
 
   opacity: 0;
   pointer-events: none;
@@ -35,14 +36,51 @@
 .add-product-modal .actions button.submit {
   font-weight: 400;
   border-radius: 24rpx;
-  color: white;
   font-size: 28rpx;
   position: relative;
   z-index: 1;
   margin: 24rpx;
   width: 200rpx;
-  background: #3d478555;
+  background: white;
+  color: #3d478588;
+  border: 1px solid currentColor;
+  box-sizing: border-box;
 }
 .add-product-modal .actions button.submit {
   background: #3d4785;
+  color: white;
+}
+
+.add-product-modal > .title {
+  font-size: 36rpx;
+  color: #3e4685;
+  margin: 24rpx 0 48rpx;
+  text-align: center;
+}
+
+/* 表单样式 */
+.form {
+  margin: 24rpx 0 0 0;
+}
+.form.blur {
+  filter: blur(4rpx);
+}
+.form-item {
+  margin: 12rpx 0;
+  background: #ffffff;
+  border-radius: 24rpx;
+  padding: 24rpx;
+  box-shadow: 0 0 24rpx 0 #3e468533;
+}
+.form-item-title {
+  margin-bottom: 4rpx;
+  font-size: 24rpx;
+  color: #3d478599;
+}
+.form-item-content {
+  font-size: 32rpx;
+  /* color: #3d478599; */
+}
+.form-item-input-placeholder {
+  color: #3d478555;
 }
