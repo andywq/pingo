@@ -1,4 +1,7 @@
 // pages/create/create.js
+const OrderAPI = require("../../apis/order")
+const { navigateBackOrIndex, sleep } = require("../../utils/util")
+
 Page({
   data: {
     title: "QVM 拼水果",
@@ -20,8 +23,20 @@ Page({
     modifyProductIndex: -1
   },
 
-  handleSubmit: function () {
-    console.log("submit", this.data)
+  handleSubmit: async function () {
+    try {
+      await wx.showLoading({mask: true})
+      await OrderAPI.create(this.data)
+    } catch (e) {
+      wx.showToast({
+        title: '提交失败请重试',
+      })
+      return
+    } finally {
+      wx.hideLoading()
+    }
+
+    navigateBackOrIndex()
   },
 
   handleTitleInput: function (e) {
@@ -73,61 +88,5 @@ Page({
     this.setData({
       [`products[${this.data.modifyProductIndex}]`]: v.detail
     })
-  },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
   }
 })

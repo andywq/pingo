@@ -86,7 +86,6 @@ Component({
       })
     },
     "data": function(data) {
-      console.log(data)
       if (!!data) {
         this.setData({
           product: data
