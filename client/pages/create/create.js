@@ -14,7 +14,10 @@ Page({
       select_mode: "int"
     }],
 
-    isAddModalVisiable: false
+    isAddModalVisiable: false,
+    isModifyModalVisiable: false,
+    modifyProduct: null,
+    modifyProductIndex: -1
   },
 
   handleSubmit: function () {
@@ -52,8 +55,24 @@ Page({
   // 处理产品数据更新
   handleTapProductCard: function (v) {
     const product = this.data.products[v.target.dataset.index]
-    console.log(product.name)
-    // console.log("handle product update", v.detail.index, v.detail.item)
+    this.setData({
+      modifyProduct: product,
+      modifyProductIndex: v.target.dataset.index,
+      isModifyModalVisiable: true
+    })
+  },
+  handleCloseModifyModal: function () {
+    this.setData({
+      isModifyModalVisiable: false
+    })
+  },
+  handleSubmitModifyModal: function (v) {
+    this.setData({
+      isModifyModalVisiable: false
+    })
+    this.setData({
+      [`products[${this.data.modifyProductIndex}]`]: v.detail
+    })
   },
 
   /**

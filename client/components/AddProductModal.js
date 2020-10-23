@@ -84,6 +84,14 @@ Component({
       this.setData({
         "computed.selectModeIndex": this.data.consts.selectModeKeys.indexOf(mode)
       })
+    },
+    "data": function(data) {
+      console.log(data)
+      if (!!data) {
+        this.setData({
+          product: data
+        })
+      }
     }
   }
 })

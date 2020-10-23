@@ -1,7 +1,7 @@
 <!--components/AddProductModal.wxml-->
 <view class="add-product-modal {{isOpen ? 'open' : ''}}">
 
-  <view class="title">添加商品</view>
+  <view class="title">{{data ? "更新" : "添加"}}商品</view>
 
   <view class="form">
     <view class="form-item">
