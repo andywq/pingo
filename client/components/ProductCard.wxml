@@ -1,0 +1,21 @@
+<!--components/ProductCard.wxml-->
+<view class="card">
+  <view class="logo">
+    <!-- logo -->
+  </view>
+  <view class="detail">
+    <view class="name">
+      {{data.name}}
+    </view>
+    <view class="desc">
+      {{data.desc}}
+    </view>
+    <view class="unit_price">
+      ￥{{data.unit_price}}
+    </view>
+    <view class="select_mode">
+      {{data.select_mode == "int" ? "整" : ""}}
+      {{data.select_mode == "float" ? "散" : ""}}
+    </view>
+  </view>
+</view>

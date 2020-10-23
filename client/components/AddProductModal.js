@@ -7,6 +7,10 @@ Component({
     isOpen: {
       type: Boolean,
       value: true
+    },
+    data: {
+      type: Object,
+      value: null
     }
   },
 
