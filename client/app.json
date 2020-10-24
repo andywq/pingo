@@ -13,5 +13,5 @@
   },
   "style": "v2",
   "sitemapLocation": "sitemap.json",
-  "entryPagePath": "pages/create/create"
+  "entryPagePath": "pages/index/index"
 }

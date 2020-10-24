@@ -1,0 +1,26 @@
+<!--components/OrderCard.wxml-->
+<view class="card">
+  <view class="order">
+    <view class="logo">
+      <image class="img" src="/icons/{{data.status}}.svg"></image>
+    </view>
+    <view class="detail">
+      <view class="title">
+        {{data.title}}
+      </view>
+      <view class="date">
+        {{createdAt}}
+      </view>
+      <view class="price">
+        ￥{{totalPrice}}
+      </view>
+    </view>
+  </view>
+
+  <view class="members" wx:if="{{members.length > 0}}">
+    <view class="sep"></view>
+    <view class="images">
+      <image class="member" wx:for="members" src="item.avatar"></image>
+    </view>
+  </view>
+</view>

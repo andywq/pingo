@@ -26,7 +26,10 @@ Page({
   handleSubmit: async function () {
     try {
       await wx.showLoading({mask: true})
-      await OrderAPI.create(this.data)
+      await OrderAPI.create({
+        title: this.data.title,
+        products: this.data.products
+      })
     } catch (e) {
       wx.showToast({
         title: '提交失败请重试',

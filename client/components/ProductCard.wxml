@@ -1,7 +1,7 @@
 <!--components/ProductCard.wxml-->
 <view class="card">
   <view class="logo">
-    <!-- logo -->
+    <image class="img" src="/icons/cube.svg"></image>
   </view>
   <view class="detail">
     <view class="name">

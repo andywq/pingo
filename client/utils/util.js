@@ -1,4 +1,5 @@
 const formatTime = date => {
+  date = new Date(date)
   const year = date.getFullYear()
   const month = date.getMonth() + 1
   const day = date.getDate()
@@ -28,7 +29,7 @@ const navigateBackOrIndex = () => {
     })
   } else {
     wx.redirectTo({
-      url: '../index/index',
+      url: '/pages/index/index',
     })
   }
 }

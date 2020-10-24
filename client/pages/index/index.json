@@ -1,3 +1,6 @@
 {
-  "usingComponents": {}
+  "usingComponents": {
+    "order-card": "/components/OrderCard"
+  },
+  "enablePullDownRefresh": true
 }

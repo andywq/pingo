@@ -1,0 +1,61 @@
+/* components/OrderCard.wxss */
+@import "/common.wxss";
+
+.card {
+  font-size: 28rpx;
+  margin: 12rpx 0;
+  box-shadow: 0 0 24rpx 0 #3e468533, 0rpx 10rpx 28rpx #3e468505 inset;
+  flex-direction: column;
+}
+.order {
+  display: flex;
+  width: 100%;
+}
+
+.logo {
+  width: 64rpx;
+  height: 64rpx;
+  background: #e5e8f7;
+  border-radius: 12rpx;
+  margin: 0 20rpx 0 2rpx;
+}
+.logo .img {
+  width: 36rpx;
+  height: 36rpx;
+  margin: 12rpx 0 0 14rpx;
+}
+.detail .title {
+  font-size: 28rpx;
+}
+.detail .date {
+  font-size: 22rpx;
+  color: #b6b6b6;
+  font-weight: 200;
+}
+.detail .price {
+  position: absolute;
+  font-weight: bold;
+  top: 20rpx;
+  right: 24rpx;
+}
+
+.members {
+  margin-bottom: -18rpx;
+}
+.members .sep {
+  /* width: 100%;
+  border-top: 1rpx solid #3e468533;
+  margin-top: 12rpx; */
+  /* box-shadow: 0 5rpx 10rpx #3e468533; */
+  margin: 6rpx;
+}
+.members .images {
+
+}
+.members .images .member {
+  width: 44rpx;
+  height: 44rpx;
+  border-radius: 22rpx;
+  box-shadow: 0 0 10rpx #3e468533;
+  margin: 6rpx;
+}

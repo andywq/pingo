@@ -9,27 +9,25 @@
     <button class="add-btn {{isAddMenuVisiable ? 'open' : ''}}" bindtap="handleToggleAddMenu">+</button>
   </view>
   <view class="list {{isAddMenuVisiable ? 'blur' : ''}}">
-    <view class="order">订单1</view>
-    <view class="order">订单1</view>
-    <view class="order">订单1</view>
-    <view class="order">订单1</view>
-    <view class="order">订单1</view>
-    <view class="order">订单1</view>
-    <view class="order">订单1</view>
-    <view class="order">订单1</view>
-    <view class="order">订单1</view>
-    <view class="order">订单1</view>
+
+    <order-card wx:for="{{orders}}" wx:key="index" data="{{item}}" index="{{index}}" bindtap="handleTapOrderCard"
+      data-index="{{index}}" />
+
   </view>
   <view class="add-menu {{isAddMenuVisiable ? 'open' : ''}}">
     <button bindtap="handleCreate">
-      <view class="icon"></view>
+      <view class="icon">
+        <image class="img" src="/icons/plus.svg"></image>
+      </view>
       <view class="texts">
         <text class="title">发起拼单</text>
         <text class="subtitle">创建拼单，并分享给朋友们</text>
       </view>
     </button>
     <button bindtap="handleJoin">
-      <view class="icon"></view>
+      <view class="icon">
+        <image class="img" src="/icons/link.svg"></image>
+      </view>
       <view class="texts">
         <text class="title">加入拼单</text>
         <text class="subtitle">输入拼单号，一起拼购</text>

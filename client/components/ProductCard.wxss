@@ -17,6 +17,12 @@
   margin: 0 20rpx 0 2rpx;
 }
 
+.logo .img {
+  width: 36rpx;
+  height: 36rpx;
+  margin: 12rpx 0 0 14rpx;
+}
+
 .detail {
   text-align: left;
   line-height: 1.4;
