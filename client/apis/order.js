@@ -6,7 +6,7 @@ module.exports = class OrderAPI {
    * @param {number} limit 
    * @param {number} skip 
    */
-  static load(limit, skip) {
+  static list(limit, skip) {
     return new Promise((res, rej) => {
       wx.request({
         method: "GET",
@@ -20,6 +20,22 @@ module.exports = class OrderAPI {
       })
     })
   }
+
+  /**
+   * 获取订单详情
+   * @param {string} id 
+   */
+  static show(id) {
+    return new Promise((res, rej) => {
+      wx.request({
+        method: "GET",
+        url: `${apiEndpoint}/v1/order/${id}`,
+        success: r => res(r.data),
+        fail: rej
+      })
+    })
+  }
+
   /**
    * 创建拼购订单
    * @param {{name: string, products: Array<{name: string, desc: string, unit_price: number, select_mode: string}>}} order 

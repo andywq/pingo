@@ -3,7 +3,7 @@
   margin: 12rpx 24rpx;
   border-radius: 24rpx;
   padding: 24rpx;
-  box-shadow: 0 0 24rpx 0 #3e468533;
+  box-shadow: 0 0 24rpx 0 #3e468533, 0rpx 10rpx 28rpx #3e468505 inset;
   position: relative;
   display: flex;
   background: #fff;

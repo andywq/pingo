@@ -93,5 +93,14 @@ Page({
     this.setData({
       [`products[${this.data.modifyProductIndex}]`]: v.detail
     })
+  },
+  handleDeleteModifyModal: function (v) {
+    this.setData({
+      isModifyModalVisiable: false
+    })
+    this.data.products.splice(this.data.modifyProductIndex, 1)
+    this.setData({
+      "products": this.data.products
+    })
   }
 })

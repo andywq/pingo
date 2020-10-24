@@ -40,6 +40,9 @@ Page({
     const i = e.target.dataset.index
     const o = this.data.orders[i]
     console.log("点击订单", i, o)
+    wx.navigateTo({
+      url: `/pages/order/order?id=${o.id}`,
+    })
   },
 
   // 生命周期
@@ -59,7 +62,8 @@ Page({
       isLoading: true
     })
     try {
-      const orders = await OrderAPI.load(5, 0)
+      wx.showLoading()
+      const orders = await OrderAPI.list(5, 0)
       this.setData({
         orders
       })
@@ -69,6 +73,7 @@ Page({
     this.setData({
       isLoading: false
     })
+    wx.hideLoading()
   },
   loadMoreOrders: async function () {
     this.setData({

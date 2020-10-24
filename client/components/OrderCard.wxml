@@ -1,5 +1,5 @@
 <!--components/OrderCard.wxml-->
-<view class="card">
+<view class="card {{type}}">
   <view class="order">
     <view class="logo">
       <image class="img" src="/icons/{{data.status}}.svg"></image>

@@ -25,4 +25,4 @@
 </view>
 
 <add-product-modal isOpen="{{isAddModalVisiable}}" bindclose="handleCloseAddModal" bindsubmit="handleSubmitAddModal" />
-<add-product-modal isOpen="{{isModifyModalVisiable}}" bindclose="handleCloseModifyModal" bindsubmit="handleSubmitModifyModal" data="{{modifyProduct}}" />
+<add-product-modal isOpen="{{isModifyModalVisiable}}" bindclose="handleCloseModifyModal" bindsubmit="handleSubmitModifyModal" binddelete="handleDeleteModifyModal" data="{{modifyProduct}}" />

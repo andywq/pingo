@@ -1,8 +1,5 @@
 // components/ProductCard.js
 Component({
-  /**
-   * 组件的属性列表
-   */
   properties: {
     index: {
       type: Number,
@@ -14,15 +11,29 @@ Component({
     }
   },
 
-  /**
-   * 组件的初始数据
-   */
   data: {
+    totalNumber: 0,
+    totalPrice: 0
   },
 
-  /**
-   * 组件的方法列表
-   */
   methods: {
+  },
+
+  observers: {
+    "data": function(d) {
+      if (!d || !d.members) {
+        return
+      }
+      let number = 0
+      for (const m of d.members) {
+        number += m.number
+      }
+      number = parseFloat(number.toFixed(4))
+
+      this.setData({
+        "totalNumber": number,
+        "totalPrice": parseFloat((number * d.unit_price).toFixed(4))
+      })
+    }
   }
 })

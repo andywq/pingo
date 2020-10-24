@@ -15,6 +15,10 @@ Component({
     data: {
       type: Object,
       value: {}
+    },
+    type: {
+      type: String,
+      value: ""
     }
   },
 

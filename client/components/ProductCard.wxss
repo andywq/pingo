@@ -7,6 +7,11 @@
   box-shadow: 0 0 24rpx 0 #3e468533;
   position: relative;
   display: flex;
+  flex-direction: column;
+}
+
+.product {
+  display: flex;
 }
 
 .logo {
@@ -51,4 +56,42 @@
   color: #b6b6b6;
   top: 62rpx;
   right: 24rpx;
+}
+
+
+.members {
+  margin-bottom: -18rpx;
+}
+.members .sep {
+  /* width: 100%;
+  border-top: 1rpx solid #3e468533;
+  margin-top: 12rpx; */
+  /* box-shadow: 0 5rpx 10rpx #3e468533; */
+  margin: 6rpx;
+}
+.members .infos {
+  display: flex;
+}
+.members .infos .member {
+  margin: 6rpx;
+}
+.members .infos .member-avatar {
+  width: 44rpx;
+  height: 44rpx;
+  border-radius: 22rpx;
+  box-shadow: 0 0 10rpx #3e468533;
+  vertical-align: middle;
+}
+.members .infos .number {
+  display: inline-block;
+  font-size: 24rpx;
+  color: #3e468566;
+  vertical-align: bottom;
+  margin: 0 8rpx;
+  font-style: italic;
+}
+.members .total {
+  font-size: 24rpx;
+  color: #3e4685AA;
+  margin: 12rpx 0;
 }

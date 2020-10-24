@@ -7,6 +7,14 @@
   box-shadow: 0 0 24rpx 0 #3e468533, 0rpx 10rpx 28rpx #3e468505 inset;
   flex-direction: column;
 }
+.card.clean {
+  box-shadow: none;
+  border-radius: 0;
+  background: #f3f8fe;
+}
+.card.clean .members {
+  display: none;
+}
 .order {
   display: flex;
   width: 100%;

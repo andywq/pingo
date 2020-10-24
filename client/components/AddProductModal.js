@@ -40,6 +40,9 @@ Component({
     handleClose() {
       this.triggerEvent("close")
     },
+    handleDelete() {
+      this.triggerEvent("delete", this.data.product)
+    },
     handleSubmit() {
       const p = this.data.product
       if (!p.name) {

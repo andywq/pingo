@@ -1,21 +1,39 @@
 <!--components/ProductCard.wxml-->
 <view class="card">
-  <view class="logo">
-    <image class="img" src="/icons/cube.svg"></image>
+  <view class="product">
+
+    <view class="logo">
+      <image class="img" src="/icons/cube.svg"></image>
+    </view>
+    <view class="detail">
+      <view class="name">
+        {{data.name}}
+      </view>
+      <view class="desc">
+        {{data.desc}}
+      </view>
+      <view class="unit_price">
+        ￥{{data.unit_price}}
+      </view>
+      <view class="select_mode">
+        {{data.select_mode == "int" ? "整" : ""}}
+        {{data.select_mode == "float" ? "散" : ""}}
+      </view>
+    </view>
   </view>
-  <view class="detail">
-    <view class="name">
-      {{data.name}}
+
+  <view class="members" wx:if="{{data.members && data.members.length > 0}}">
+    <view class="sep"></view>
+    <view class="infos">
+      <view class="member" wx:for="{{data.members}}" wx:key="index">
+        <image class="member-avatar"  src="{{item.avatar}}"></image>
+        <view class="number">
+          *{{item.number}}
+        </view>
+      </view>
     </view>
-    <view class="desc">
-      {{data.desc}}
-    </view>
-    <view class="unit_price">
-      ￥{{data.unit_price}}
-    </view>
-    <view class="select_mode">
-      {{data.select_mode == "int" ? "整" : ""}}
-      {{data.select_mode == "float" ? "散" : ""}}
+    <view class="total">
+      小计: {{totalNumber}} * {{data.unit_price}} = ￥{{totalPrice}}
     </view>
   </view>
 </view>
