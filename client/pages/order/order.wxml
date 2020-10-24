@@ -32,4 +32,5 @@
   bindclose="handleCloseModifyModal"
   bindsubmit="handleSubmitModifyModal"
   binddelete="handleDeleteModifyModal"
+  bindselect="handleSelectModifyModal"
   data="{{modifyProduct}}" />

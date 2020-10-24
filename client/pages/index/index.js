@@ -39,7 +39,6 @@ Page({
   handleTapOrderCard: function (e) {
     const i = e.target.dataset.index
     const o = this.data.orders[i]
-    console.log("点击订单", i, o)
     wx.navigateTo({
       url: `/pages/order/order?id=${o.id}`,
     })

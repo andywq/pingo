@@ -1,8 +1,10 @@
 // components/AddProductModal.js
+
+//获取应用实例
+const app = getApp();
+
 Component({
-  /**
-   * 组件的属性列表
-   */
+
   properties: {
     isOpen: {
       type: Boolean,
@@ -14,9 +16,6 @@ Component({
     }
   },
 
-  /**
-   * 组件的初始数据
-   */
   data: {
     product: {
       name: "", // 名称
@@ -30,12 +29,11 @@ Component({
     },
     computed: {
       selectModeIndex: 0
-    }
+    },
+
+    myNumber: 0
   },
 
-  /**
-   * 组件的方法列表
-   */
   methods: {
     handleClose() {
       this.triggerEvent("close")
@@ -53,7 +51,10 @@ Component({
         return
       }
 
-      this.triggerEvent("submit", this.data.product)
+      this.triggerEvent("submit", {
+        ...this.data.product,
+        _my_number: this.data.myNumber
+      })
     },
     handleSelectModeChange(e) {
       const mode = this.data.consts.selectModeKeys[e.detail.value]
@@ -79,7 +80,21 @@ Component({
       this.setData({
         "product.unit_price": price
       })
-    }
+    },
+    handleMyNumberInput(e) {
+      let n = parseFloat(e.detail.value)
+      if (isNaN(n)) {
+        n = 0
+      }
+
+      if (this.data.product.select_mode == "int") {
+        n = parseInt(n + "", 10)
+      }
+
+      this.setData({
+        "myNumber": n
+      })
+    },
   },
 
   observers: {
@@ -90,6 +105,15 @@ Component({
     },
     "data": function(data) {
       if (!!data) {
+        if (!!data.members) {
+          const m = data.members.find(v => v.id == app.globalData.userInfo.id)
+          if (!!m) {
+            this.setData({
+              myNumber: m.number
+            })
+          }
+        }
+
         this.setData({
           product: data
         })

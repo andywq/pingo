@@ -27,6 +27,9 @@ App({
     })
   },
   globalData: {
-    userInfo: null
+    // userInfo: null // id: xxx
+    userInfo: {
+      id: 111
+    }
   }
 })

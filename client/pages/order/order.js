@@ -1,4 +1,7 @@
 const OrderAPI = require("../../apis/order")
+const {
+  navigateBackOrIndex
+} = require("../../utils/util")
 
 Page({
   data: {
@@ -51,10 +54,29 @@ Page({
     wx.hideLoading()
   },
 
+  handleClose: function () {
+    wx.showModal({
+      title: "您确定要结束此次拼购吗？结束后无法编辑。",
+      success: async ({
+        confirm
+      }) => {
+        if (!confirm) {
+          return
+        }
 
-  handleTitleInput: function (e) {
-    this.setData({
-      "order.title": e.detail.value
+        try {
+          wx.showLoading()
+          await OrderAPI.close(this.id)
+          navigateBackOrIndex()
+        } catch (err) {
+          console.log(err)
+          wx.showToast({
+            title: '关闭失败',
+          })
+        } finally {
+          wx.hideLoading()
+        }
+      }
     })
   },
 
@@ -93,13 +115,22 @@ Page({
       isModifyModalVisiable: false
     })
   },
-  handleSubmitModifyModal: function (v) {
+  handleSubmitModifyModal: async function (v) {
     this.setData({
       isModifyModalVisiable: false
     })
-    this.setData({
-      [`order.products[${this.data.modifyProductIndex}]`]: v.detail
-    })
+
+    try {
+      wx.showLoading()
+    } catch (error) {
+      await OrderAPI.updateProductInfo(this.id, v.detail.id, v.detail)
+      await OrderAPI.updateMyProductSelectNumber(this.id, v.detail.id, v.detail._my_number)
+    } finally {
+      wx.hideLoading()
+    }
+
+    // TODO 提交修改
+
   },
   handleDeleteModifyModal: async function (v) {
     const p = v.detail
@@ -110,7 +141,7 @@ Page({
       })
       return
     }
-    
+
     this.setData({
       isModifyModalVisiable: false
     })
