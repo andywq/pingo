@@ -20,7 +20,7 @@
   <view class="members" wx:if="{{members.length > 0}}">
     <view class="sep"></view>
     <view class="images">
-      <image class="member" wx:for="members" src="item.avatar"></image>
+      <image class="member" wx:for="{{members}}" wx:key="index" src="{{item.avatar}}"></image>
     </view>
   </view>
 </view>

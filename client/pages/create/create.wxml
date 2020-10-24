@@ -2,7 +2,9 @@
 
 <view class="titlebar {{isAddModalVisiable ? 'blur':''}}">
   <text class="title">发起拼购</text>
-  <button class="submit-btn" bindtap="handleSubmit">+</button>
+  <button class="submit-btn" bindtap="handleSubmit">
+    <image class="img" src="/icons/check.svg"></image>
+  </button>
 </view>
 
 <view class="form {{isAddModalVisiable ? 'blur': ''}}">

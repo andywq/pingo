@@ -4,18 +4,20 @@ const { navigateBackOrIndex, sleep } = require("../../utils/util")
 
 Page({
   data: {
-    title: "QVM 拼水果",
-    products: [{
-      name: "山东红富士",
-      desc: "整箱 24个每箱 甜脆",
-      unit_price: 14.5,
-      select_mode: "float"
-    }, {
-      name: "辽宁巨峰 A果",
-      desc: "整箱 约6串 约15斤",
-      unit_price: 88,
-      select_mode: "int"
-    }],
+    title: "",
+    products: [],
+    // title: "QVM 拼水果",
+    // products: [{
+    //   name: "山东红富士",
+    //   desc: "整箱 24个每箱 甜脆",
+    //   unit_price: 14.5,
+    //   select_mode: "float"
+    // }, {
+    //   name: "辽宁巨峰 A果",
+    //   desc: "整箱 约6串 约15斤",
+    //   unit_price: 88,
+    //   select_mode: "int"
+    // }],
 
     isAddModalVisiable: false,
     isModifyModalVisiable: false,

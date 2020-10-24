@@ -49,9 +49,7 @@
   /* box-shadow: 0 5rpx 10rpx #3e468533; */
   margin: 6rpx;
 }
-.members .images {
 
-}
 .members .images .member {
   width: 44rpx;
   height: 44rpx;
