@@ -1,0 +1,97 @@
+/* components/ProductCard.wxss */
+.card {
+  margin: 12rpx 24rpx;
+  background: #ffffff;
+  border-radius: 24rpx;
+  padding: 24rpx;
+  box-shadow: 0 0 24rpx 0 #3e468533;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.product {
+  display: flex;
+}
+
+.logo {
+  width: 64rpx;
+  height: 64rpx;
+  background: #e5e8f7;
+  border-radius: 12rpx;
+  margin: 0 20rpx 0 2rpx;
+}
+
+.logo .img {
+  width: 36rpx;
+  height: 36rpx;
+  margin: 12rpx 0 0 14rpx;
+}
+
+.detail {
+  text-align: left;
+  line-height: 1.4;
+}
+
+.name {
+  font-size: 28rpx;
+}
+
+.desc {
+  font-size: 22rpx;
+  color: #b6b6b6;
+  font-weight: 200;
+}
+
+.unit_price {
+  position: absolute;
+  color: #ff7875;
+  top: 20rpx;
+  right: 24rpx;
+}
+
+.select_mode {
+  position: absolute;
+  font-size: 22rpx;
+  color: #b6b6b6;
+  top: 62rpx;
+  right: 24rpx;
+}
+
+
+.members {
+  margin-bottom: -18rpx;
+}
+.members .sep {
+  /* width: 100%;
+  border-top: 1rpx solid #3e468533;
+  margin-top: 12rpx; */
+  /* box-shadow: 0 5rpx 10rpx #3e468533; */
+  margin: 6rpx;
+}
+.members .infos {
+  display: flex;
+}
+.members .infos .member {
+  margin: 6rpx;
+}
+.members .infos .member-avatar {
+  width: 44rpx;
+  height: 44rpx;
+  border-radius: 22rpx;
+  box-shadow: 0 0 10rpx #3e468533;
+  vertical-align: middle;
+}
+.members .infos .number {
+  display: inline-block;
+  font-size: 24rpx;
+  color: #3e468566;
+  vertical-align: bottom;
+  margin: 0 8rpx;
+  font-style: italic;
+}
+.members .total {
+  font-size: 24rpx;
+  color: #3e4685AA;
+  margin: 12rpx 0;
+}

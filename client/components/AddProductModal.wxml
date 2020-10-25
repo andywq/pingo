@@ -1,7 +1,7 @@
 <!--components/AddProductModal.wxml-->
 <view class="add-product-modal {{isOpen ? 'open' : ''}}">
 
-  <view class="title">添加商品</view>
+  <view class="title">{{data ? "更新" : "添加"}}商品</view>
 
   <view class="form">
     <view class="form-item">
@@ -36,12 +36,21 @@
             {{consts.selectModeNames[computed.selectModeIndex]}}
           </view>
         </picker>
-
       </view>
     </view>
+
+    <view class="form-item">
+      <view class="form-item-title">我的购买数量：</view>
+      <view class="form-item-content">
+        <input type="number" value="{{myNumber}}" bindblur="handleMyNumberInput"
+          placeholder-class="form-item-input-placeholder" placeholder="购买数量" />
+      </view>
+    </view>
+
   </view>
   <view class="actions">
     <button class="close" bindtap="handleClose">取消</button>
+    <button wx:if="{{data}}" class="delete" bindtap="handleDelete">删除</button>
     <button class="submit" bindtap="handleSubmit">确定</button>
   </view>
 </view>

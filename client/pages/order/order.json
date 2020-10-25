@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "add-product-modal": "../../components/AddProductModal",
+    "product-card": "../../components/ProductCard",
+    "order-card": "/components/OrderCard"
+  },
+  "enablePullDownRefresh": true
+}

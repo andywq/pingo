@@ -1,4 +1,5 @@
 const formatTime = date => {
+  date = new Date(date)
   const year = date.getFullYear()
   const month = date.getMonth() + 1
   const day = date.getDate()
@@ -14,6 +15,27 @@ const formatNumber = n => {
   return n[1] ? n : '0' + n
 }
 
+const sleep = (sec) => {
+  return new Promise((res) => {
+    setTimeout(res, sec * 1000)
+  })
+}
+
+const navigateBackOrIndex = () => {
+  const hasBack = getCurrentPages().length > 1
+  if (hasBack) {
+    wx.navigateBack({
+      delta: 0,
+    })
+  } else {
+    wx.redirectTo({
+      url: '/pages/index/index',
+    })
+  }
+}
+
 module.exports = {
-  formatTime: formatTime
+  formatTime,
+  sleep,
+  navigateBackOrIndex
 }

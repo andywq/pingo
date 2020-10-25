@@ -1,3 +1,6 @@
+const { sleep, navigateBackOrIndex } = require("../../utils/util");
+const OrderAPI = require("../../apis/order");
+
 // pages/join/join.js
 Page({
 
@@ -22,28 +25,27 @@ Page({
     })
   },
 
-  handleSubmit: function () {
+  handleSubmit: async function () {
     if (this.data.code.length < 6) {
       return
     }
-    console.log("submit")
     this.setData({
       submitting: true
     })
 
-    // TODO
-    setTimeout(() => {
-      const hasBack = getCurrentPages().length > 1
-      if (hasBack) {
-        wx.navigateBack({
-          delta: 0,
-        })
-      } else {
-        wx.redirectTo({
-          url: '../index/index',
-        })
-      }
-    }, 2000)
+    try {
+      await wx.showLoading({mask: true})
+      await OrderAPI.join(this.data.code)
+    } catch (e) {
+      wx.showToast({
+        title: '加入失败，请重试',
+      })
+      return
+    } finally {
+      wx.hideLoading()
+    }
+
+    navigateBackOrIndex()
   },
 
   /**

@@ -67,6 +67,11 @@ button {
   border-radius: 12rpx;
   margin: 0 20rpx 0 2rpx;
 }
+.add-menu button .icon .img {
+  width: 32rpx;
+  height: 32rpx;
+  margin: 12rpx 0 0 0rpx;
+}
 .add-menu button .texts {
   text-align: left;
   line-height: 1;

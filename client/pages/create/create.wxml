@@ -1,25 +1,28 @@
 <!--pages/create/create.wxml-->
+
 <view class="titlebar {{isAddModalVisiable ? 'blur':''}}">
   <text class="title">发起拼购</text>
-  <button class="submit-btn" bindtap="handleSubmit">+</button>
+  <button class="submit-btn" bindtap="handleSubmit">
+    <image class="img" src="/icons/check.svg"></image>
+  </button>
 </view>
 
 <view class="form {{isAddModalVisiable ? 'blur': ''}}">
-
-  <form catchsubmit="handleSubmit">
-    <view class="form-item">
-      <view class="form-item-title">主题：</view>
-      <view class="form-item-content">
-        <input type="text" value="{{title}}" bindinput="handleTitleInput" name="input" placeholder-class="form-item-input-placeholder" placeholder="拼购主题，如 拼水果" />
-      </view>
+  <view class="form-item">
+    <view class="form-item-title">主题：</view>
+    <view class="form-item-content">
+      <input type="text" value="{{title}}" bindinput="handleTitleInput" name="input"
+        placeholder-class="form-item-input-placeholder" placeholder="拼购主题，如 拼水果" />
     </view>
+  </view>
 
-    <view class="actions">
-      <button class="add-btn" bindtap="handleAddProduct">添加商品</button>
-    </view>
+  <product-card wx:for="{{products}}" wx:key="index" data="{{item}}" index="{{index}}"
+    bindtap="handleTapProductCard" data-index="{{index}}" />
 
-  </form>
+  <view class="actions">
+    <button class="add-btn" bindtap="handleAddProduct">添加商品</button>
+  </view>
 </view>
 
-<add-product-modal isOpen="{{isAddModalVisiable}}" bindclose="handleCloseAddModal" bindsubmit="handleSubmitAddModal"></add-product-modal>
-
+<add-product-modal isOpen="{{isAddModalVisiable}}" bindclose="handleCloseAddModal" bindsubmit="handleSubmitAddModal" />
+<add-product-modal isOpen="{{isModifyModalVisiable}}" bindclose="handleCloseModifyModal" bindsubmit="handleSubmitModifyModal" binddelete="handleDeleteModifyModal" data="{{modifyProduct}}" />

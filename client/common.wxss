@@ -1,0 +1,24 @@
+
+.card {
+  margin: 12rpx 24rpx;
+  border-radius: 24rpx;
+  padding: 24rpx;
+  box-shadow: 0 0 24rpx 0 #3e468533, 0rpx 10rpx 28rpx #3e468505 inset;
+  position: relative;
+  display: flex;
+  background: #fff;
+}
+
+/* https://cssgradient.io/gradient-backgrounds/ */
+.gradient-0 {
+  background-color: #D9AFD9;
+  background-image: linear-gradient(62deg, #D9AFD9 0%, #97D9E1 100%);
+}
+.gradient-1 {
+  background-color: #8EC5FC;
+  background-image: linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%);
+}
+.gradient-2 {
+  background-color: #0093E9;
+  background-image: linear-gradient(62deg, #0093E9 0%, #80D0C7 100%);
+}
