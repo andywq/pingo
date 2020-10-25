@@ -1,6 +1,9 @@
 const Router = require("@koa/router");
 const { sleep } = require("../lib/utils");
 
+const conf = require("../lib/config")
+
+
 const UserRouter = new Router();
 
 // GET /user 获取用户列表
