@@ -1,33 +1,43 @@
-const Koa = require("koa");
-const Router = require("@koa/router");
+const Koa = require("koa")
+const Router = require("@koa/router")
+const bodyParser = require("koa-bodyparser")
 
 const config = require("./lib/config")
-const UserRouter = require("./controller/user");
+const { setup: setupDB } = require("./model/setup")
 
-const app = new Koa();
-const router = new Router();
+const LogMiddleware = require("./middleware/log")
+const AuthMiddleware = require("./middleware/auth")
 
-// 配置
-//   - 数据库信息：host 端口 用户名 密码
-//   - 服务端口
-// 鉴权
-// 日志
-// 路由
+const UserRouter = require("./controller/user")
 
-app.use(async (ctx, next) => {
-  const st = new Date().getTime()
-  await next()
-  const et = new Date().getTime()
-  console.log("request used", et - st, "ms")
-})
+// 启动
+async function boot() {
+  try {
+    // 初始化数据库
+    await setupDB(config.mongo_host, config.mongo_port, config.mongo_db_name, config.mongo_user, config.mongo_password)
 
-router.get("/ping", (ctx) => {
-  ctx.response.body = "pong";
-});
-router.use("/user", UserRouter.routes());
+    // 初始化 Web 服务器
+    const app = new Koa()
+    const router = new Router()
 
-app.use(router.routes());
+    // 中间件注册
+    app.use(LogMiddleware)
+    app.use(bodyParser())
+    app.use(AuthMiddleware)
 
-app.listen(config.port, () => {
-  console.log(`服务已启动 @${config.port}`);
-});
+    // 路由注册
+    router.use("/user", UserRouter.routes())
+    // router.use("/order", OrderRouter.routes())
+
+    // 启动
+    app.use(router.routes())
+    app.listen(config.port, () => {
+      console.log(`服务已启动 @${config.port}`)
+    })
+  } catch (error) {
+    console.error("启动失败", error)
+    process.exit(1)
+  }
+}
+
+boot()

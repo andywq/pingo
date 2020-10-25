@@ -5,6 +5,6 @@
  */
 exports.sleep = function (sec) {
   return new Promise((res) => {
-    setTimeout(res, sec * 1000);
-  });
-};
+    setTimeout(res, sec * 1000)
+  })
+}
