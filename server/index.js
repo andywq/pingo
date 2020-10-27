@@ -9,7 +9,7 @@ const LogMiddleware = require("./middleware/log")
 const AuthMiddleware = require("./middleware/auth")
 
 const UserRouter = require("./controller/user")
-
+const OrderRouter = require("./controller/order")
 // 启动
 async function boot() {
   try {
@@ -28,6 +28,8 @@ async function boot() {
     // 路由注册
     router.use("/user", UserRouter.routes())
     // router.use("/order", OrderRouter.routes())
+
+    router.use("/order", OrderRouter.routes())
 
     // 启动
     app.use(router.routes())
