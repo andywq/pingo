@@ -8,9 +8,9 @@ App({
       success: async res => {
         // 发送 res.code 到后台换取 sessionKey, unionId: id
         try {
-          const { jwt_token, user } = await UserAPI.login(res.code)
-          this.globalData.session = jwt_token
-          this.globalData.userInfo = user
+          const { accessToken, account } = await UserAPI.login(res.code)
+          this.globalData.accessToken = accessToken
+          this.globalData.account = account
         } catch (error) {
           console.error(error)
           wx.showModal({
@@ -47,7 +47,7 @@ App({
     // })
   },
   globalData: {
-    session: null,
-    userInfo: null
+    accessToken: null,
+    account: null
   }
 })

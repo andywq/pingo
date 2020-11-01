@@ -106,7 +106,7 @@ Component({
     "data": function(data) {
       if (!!data) {
         if (!!data.members) {
-          const m = data.members.find(v => v.id == app.globalData.session.open_id)
+          const m = data.members.find(v => v.id == app.globalData.account.id)
           if (!!m) {
             this.setData({
               myNumber: m.number

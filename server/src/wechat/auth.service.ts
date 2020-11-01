@@ -43,21 +43,31 @@ export class AuthService {
       )
 
       account = await this.accountService.findByWXOpenId(wechatResp.data.openid)
+
+      // 用户不存在，创建一个
+      if (account == null) {
+        account = new AccountEntity()
+        account.name = "微信用户"
+        account.wx_open_id = wechatResp.data.openid
+        account.avatar_url = ""
+        account.created_at = new Date()
+
+        this.accountService.saveOrUpdate(account)
+      }
     } catch (e) {
       throw new InternalServerErrorException()
     }
 
-    if (account == null) {
-      throw new UnauthorizedException()
-    }
+    const payload = JSON.parse(JSON.stringify(account))
 
     return {
       account,
-      accessToken: this.jwtService.sign(account)
+      accessToken: this.jwtService.sign(payload)
     }
   }
 
   async validateUser(payload: AccountEntity): Promise<AccountEntity> {
+    // 用户没有状态，此处无需校验
     return payload
   }
 }

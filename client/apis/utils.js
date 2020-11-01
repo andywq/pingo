@@ -1,7 +1,7 @@
 
 // const apiEndpoint = "https://api.pingo.alexyan.cc"
 // const apiEndpoint = "http://api.alexyan.cc/mock/104"
-const apiEndpoint = "http://127.0.0.1:9099"
+const apiEndpoint = "http://127.0.0.1:8080/api/wechat"
 
 exports.fetch = function(method, url, data) {
 
@@ -9,11 +9,11 @@ exports.fetch = function(method, url, data) {
   const header = {}
 
   if (method != "GET") {
-    header["content-type"] = "application/json"
+    header["Content-Type"] = "application/json"
   }
 
-  if (app.globalData.session) {
-    header["authorization"] = `Bearer ${app.globalData.session}`
+  if (app.globalData.accessToken) {
+    header["Authorization"] = `Bearer ${app.globalData.accessToken}`
   }
 
   return new Promise((res, rej) => {

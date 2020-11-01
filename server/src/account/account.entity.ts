@@ -15,8 +15,8 @@ export class AccountEntity {
   wx_open_id: string // 微信
 
   @Column()
-  avatar_url
+  avatar_url: string
 
-  @Column("longtext")
-  description: string
+  @Column()
+  created_at: Date
 }

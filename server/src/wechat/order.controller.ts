@@ -27,6 +27,7 @@ export class OrderController {
     @Query()
     query: IPageReq
   ) {
+    console.log("listorder")
     return this.service.list(query)
   }
 
