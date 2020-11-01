@@ -6,8 +6,7 @@ const UUID = require("uuid")
 
 const OrderRouter = new Router()
 
-// create order
-
+// 创建订单
 OrderRouter.post("/", async (ctx) => {
   try {
     const fontArgs = ctx.request.body
@@ -17,8 +16,8 @@ OrderRouter.post("/", async (ctx) => {
       title: fontArgs.title,
       status: "open",
       creator: ctx.user,
+      members: [ctx.user],
       products: fontProducts.map((p) => ({
-        // id: UUID.v4(),
         ...p,
       })),
     }
@@ -35,12 +34,12 @@ OrderRouter.post("/", async (ctx) => {
   }
 })
 
+// 获取用户加入的订单列表
 OrderRouter.get("/", async (ctx) => {
   try {
-    let order = await Order.find({}).exec()
-    ctx.body = {
-      order,
-    }
+    // TODO 分页，只能看到member自己的订单
+    let orders = await Order.find({}).exec()
+    ctx.body = orders
   } catch (err) {
     console.error(err)
     ctx.status = 500
@@ -48,18 +47,15 @@ OrderRouter.get("/", async (ctx) => {
   }
 })
 
+// 获取订单详情
 OrderRouter.get("/:id", async (ctx) => {
   try {
-    console.log("===order id===" + ctx.params.id)
-    // console.log("===product id===" + ctx.request.products.id)
     let order = await Order.findOne({
       _id: ctx.params.id,
     }).exec()
 
     if (!!order) {
-      ctx.body = {
-        order,
-      }
+      ctx.body = order
       return
     } else {
       ctx.body = "Not found"
@@ -71,6 +67,7 @@ OrderRouter.get("/:id", async (ctx) => {
   }
 })
 
+// 关闭订单
 OrderRouter.post("/:id/close", async (ctx) => {
   try {
     console.log("===order id===" + ctx.params.id)
@@ -81,7 +78,7 @@ OrderRouter.post("/:id/close", async (ctx) => {
     let order = await Order.findOne(query).exec()
     if (!!order) {
       console.log("==== Order exist====")
-      await updatePromise(query, update, option).then(() => {
+      await OrderPromiseActions.update(query, update, option).then(() => {
         ctx.status = 200
       })
       return
@@ -96,6 +93,7 @@ OrderRouter.post("/:id/close", async (ctx) => {
   }
 })
 
+// 删除商品
 OrderRouter.delete("/:orderId/product/:productId", async (ctx) => {
   try {
     const { orderId, productId } = ctx.params
@@ -109,7 +107,7 @@ OrderRouter.delete("/:orderId/product/:productId", async (ctx) => {
       console.log("==== Order exist====")
       order.products = order.products.filter((p) => p._id != productId)
       let update = { products: order.products }
-      await updatePromise(query, update, option).then(() => {
+      await OrderPromiseActions.update(query, update, option).then(() => {
         ctx.status = 200
       })
       return
@@ -124,11 +122,9 @@ OrderRouter.delete("/:orderId/product/:productId", async (ctx) => {
 })
 
 // 新增商品信息
-OrderRouter.post("/:orderId/product/:productId", async (ctx) => {
+OrderRouter.post("/:orderId/product", async (ctx) => {
   try {
-    const { orderId, productId } = ctx.params
-    console.log("===order id===" + orderId)
-    console.log("===product id===" + productId)
+    const { orderId } = ctx.params
     const query = { _id: orderId }
     const option = { multi: true }
     const order = await Order.findOne(query).exec()
@@ -146,7 +142,7 @@ OrderRouter.post("/:orderId/product/:productId", async (ctx) => {
     console.log("=3==" + update.products)
     if (!!order) {
       console.log("==== Order exist====")
-      await updatePromise(query, update, option).then(() => {
+      await OrderPromiseActions.update(query, update, option).then(() => {
         ctx.status = 200
       })
       return
@@ -166,7 +162,7 @@ OrderRouter.post("/:orderId/product/:productId", async (ctx) => {
  * @param {string} productId
  * @param {number} myNumber
  */
-OrderRouter.patch("/:orderId/product/:productId/my_number/:myNumber", async (ctx) => {
+OrderRouter.put("/:orderId/product/:productId/my_number/:myNumber", async (ctx) => {
   const { orderId, productId, myNumber } = ctx.params
   console.log("===order id===" + orderId)
   console.log("===product id===" + productId)
@@ -187,7 +183,7 @@ OrderRouter.patch("/:orderId/product/:productId/my_number/:myNumber", async (ctx
       multi: true,
     }
 
-    await updatePromise(Order, query, update, arrayFilter).then(() => {
+    await OrderPromiseActions.update(query, update, arrayFilter).then(() => {
       ctx.status = 200
     })
     return
@@ -199,7 +195,7 @@ OrderRouter.patch("/:orderId/product/:productId/my_number/:myNumber", async (ctx
 })
 
 // 更新商品信息
-OrderRouter.patch("/:orderId/product/:productId", async (ctx) => {
+OrderRouter.put("/:orderId/product/:productId", async (ctx) => {
   try {
     const { orderId, productId } = ctx.params
     const { userId } = ctx.user
@@ -219,7 +215,7 @@ OrderRouter.patch("/:orderId/product/:productId", async (ctx) => {
       multi: true,
     }
 
-    await updatePromise(query, update, arrayFilter).then(() => {
+    await OrderPromiseActions.update(query, update, arrayFilter).then(() => {
       ctx.status = 200
     })
     return
@@ -229,19 +225,5 @@ OrderRouter.patch("/:orderId/product/:productId", async (ctx) => {
     ctx.body = err
   }
 })
-
-async function updatePromise(query, update, option) {
-  return new Promise((res, rej) => {
-    Order.update(query, update, option, function (err, resp) {
-      if (err) {
-        console.log("Err==" + err)
-        rej(err)
-      } else {
-        console.log("Res==" + resp)
-        res(resp)
-      }
-    })
-  })
-}
 
 module.exports = OrderRouter

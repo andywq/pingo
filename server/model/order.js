@@ -1,6 +1,12 @@
 const mongoose = require("mongoose")
 const { Schema } = mongoose
 
+const memberSchema = {
+  open_id: String,
+  name: String,
+  avatar: String,
+}
+
 const orderSchema = new Schema({
   title: String,
   status: String,
@@ -8,11 +14,8 @@ const orderSchema = new Schema({
     type: Date,
     default: Date.now,
   },
-  creator: {
-    id: String,
-    name: String,
-    avatar: String,
-  },
+  creator: memberSchema,
+  members: [memberSchema],
   products: [
     {
       name: String,
@@ -21,10 +24,8 @@ const orderSchema = new Schema({
       select_mode: String,
       members: [
         {
-          userid: String,
-          name: String,
+          ...memberSchema,
           number: Number,
-          avatar: String,
         },
       ],
     },
@@ -32,7 +33,9 @@ const orderSchema = new Schema({
 })
 
 // 用户 Model
-exports.Order = mongoose.model("Order", orderSchema)
+const Order = mongoose.model("Order", orderSchema)
+
+exports.Order = Order
 
 exports.OrderPromiseActions = {
   update: function (query, update, option) {

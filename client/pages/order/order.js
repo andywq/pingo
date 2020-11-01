@@ -21,6 +21,7 @@ Page({
   },
 
   onLoad: function (options) {
+    console.log(options)
     this.setData({
       "id": options.id
     })
@@ -33,9 +34,6 @@ Page({
   },
 
   refresh: async function () {
-    // if (!this.data.id) {
-    //   return
-    // }
     wx.showLoading()
     this.isLoading = true
 
@@ -122,15 +120,16 @@ Page({
 
     try {
       wx.showLoading()
+      await OrderAPI.updateProductInfo(this.data.id, v.detail._id, v.detail)
+      await OrderAPI.updateMyProductSelectNumber(this.data.id, v.detail._id, v.detail._my_number)
     } catch (error) {
-      await OrderAPI.updateProductInfo(this.id, v.detail.id, v.detail)
-      await OrderAPI.updateMyProductSelectNumber(this.id, v.detail.id, v.detail._my_number)
+      console.error(error)
+      wx.showToast({
+        title: '更新失败，请重试',
+      })
     } finally {
       wx.hideLoading()
     }
-
-    // TODO 提交修改
-
   },
   handleDeleteModifyModal: async function (v) {
     const p = v.detail

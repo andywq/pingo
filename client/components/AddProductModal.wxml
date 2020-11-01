@@ -39,7 +39,7 @@
       </view>
     </view>
 
-    <view class="form-item">
+    <view class="form-item" wx:if="{{data}}">
       <view class="form-item-title">我的购买数量：</view>
       <view class="form-item-content">
         <input type="number" value="{{myNumber}}" bindblur="handleMyNumberInput"

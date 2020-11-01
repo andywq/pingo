@@ -40,7 +40,7 @@ Page({
     const i = e.target.dataset.index
     const o = this.data.orders[i]
     wx.navigateTo({
-      url: `/pages/order/order?id=${o.id}`,
+      url: `/pages/order/order?id=${o._id}`,
     })
   },
 

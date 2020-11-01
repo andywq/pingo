@@ -59,7 +59,7 @@ module.exports = class OrderAPI {
    * @param {string} info 
    */
   static updateProductInfo(orderId, productId, info) {
-    return fetch("PATCH", `/order/${orderId}/product/${productId}`, {
+    return fetch("PUT", `/order/${orderId}/product/${productId}`, {
       name: info.name,
       desc: info.desc,
       unit_price: info.unit_price,
@@ -74,6 +74,6 @@ module.exports = class OrderAPI {
    * @param {number} myNumber 
    */
   static updateMyProductSelectNumber(orderId, productId, myNumber) {
-    return fetch("PATCH", `/order/${orderId}/product/${productId}/my_number/${myNumber}`)
+    return fetch("PUT", `/order/${orderId}/product/${productId}/my_number/${myNumber}`)
   }
 }

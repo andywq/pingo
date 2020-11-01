@@ -47,7 +47,6 @@ App({
     // })
   },
   globalData: {
-    // userInfo: null // id: xxx
     session: null,
     userInfo: null
   }
