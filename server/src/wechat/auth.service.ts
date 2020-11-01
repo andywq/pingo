@@ -52,7 +52,7 @@ export class AuthService {
         account.avatar_url = ""
         account.created_at = new Date()
 
-        this.accountService.saveOrUpdate(account)
+        account = await this.accountService.saveOrUpdate(account)
       }
     } catch (e) {
       throw new InternalServerErrorException()

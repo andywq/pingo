@@ -49,7 +49,7 @@ export class OrderController {
     const res = []
 
     for (const o of orders) {
-      const total = await this.productMemberServ.sumByOrderId(o.id)
+      const total = await this.productMemberServ.sumNumberByOrderId(o.id)
       res.push({
         ...o,
         total

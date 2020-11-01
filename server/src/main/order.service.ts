@@ -34,8 +34,8 @@ export class OrderService {
         .leftJoinAndSelect("order.creator", "c")
         .leftJoinAndSelect("order.members", "account")
         .where("account.id = :userId", { userId })
-        .orderBy("order.status", "DESC")
-        .addOrderBy("order.created_at", "DESC")
+        // .orderBy("order.cr", "DESC")
+        .orderBy("order.created_at", "DESC")
         .skip(skip)
         .limit(limit)
         .getMany()
@@ -58,6 +58,8 @@ export class OrderService {
         m.creator = user
         m.members = [user]
         m.products = []
+        m.share_code = await this.getNewShareCode()
+
         m = await tm.save(m)
 
         for (const p of data.products) {
@@ -67,6 +69,7 @@ export class OrderService {
           pm.unit_price = p.unit_price
           pm.created_at = new Date()
           pm.updated_at = new Date()
+          pm.desc = p.desc
           pm = await tm.save(pm)
           m.products.push(pm)
         }
@@ -156,5 +159,80 @@ export class OrderService {
     } catch (err) {
       throw new InternalServerErrorException(err)
     }
+  }
+
+  async getNewShareCode() {
+    // TODO 判断重复
+    const dict = [
+      "0",
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "a",
+      "b",
+      "c",
+      "d",
+      "e",
+      "f",
+      "g",
+      "h",
+      "i",
+      "j",
+      "k",
+      "l",
+      "m",
+      "n",
+      "o",
+      "p",
+      "q",
+      "r",
+      "s",
+      "t",
+      "u",
+      "v",
+      "w",
+      "x",
+      "y",
+      "z",
+      "A",
+      "B",
+      "C",
+      "D",
+      "E",
+      "F",
+      "G",
+      "H",
+      "I",
+      "J",
+      "K",
+      "L",
+      "M",
+      "N",
+      "O",
+      "P",
+      "Q",
+      "R",
+      "S",
+      "T",
+      "U",
+      "V",
+      "W",
+      "X",
+      "Y",
+      "Z"
+    ]
+
+    const tmp = []
+    for (let i = 0; i < 6; i++) {
+      const pos = Math.round(Math.random() * (dict.length - 1))
+      tmp.push(dict[pos])
+    }
+    return tmp.join("")
   }
 }

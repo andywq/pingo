@@ -36,6 +36,9 @@ export class OrderEntity {
   @Column()
   updated_at: Date
 
+  @Column()
+  share_code: string
+
   @OneToMany(type => ProductEntity, product => product.order, {
     cascade: false
   })
