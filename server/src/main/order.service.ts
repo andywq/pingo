@@ -5,15 +5,25 @@ import {
   InternalServerErrorException
 } from "@nestjs/common"
 import { InjectRepository } from "@nestjs/typeorm"
-import { Repository, Transaction, TransactionRepository } from "typeorm"
+import {
+  getManager,
+  Repository,
+  Transaction,
+  TransactionRepository
+} from "typeorm"
 import { IProduct, OrderEntity, OrderStatus } from "./order.entity"
 import { AccountEntity } from "src/account/account.entity"
+import { ProductEntity } from "./product.entity"
+import { ProductMemberService } from "./product_member.service"
+import { ProductMemberEntity } from "./product_member.entity"
 
 @Injectable()
 export class OrderService {
   constructor(
     @InjectRepository(OrderEntity)
-    private readonly repo: Repository<OrderEntity>
+    private readonly repo: Repository<OrderEntity>,
+    @InjectRepository(ProductMemberEntity)
+    private readonly pmRepo: Repository<ProductMemberEntity>
   ) {}
 
   async listByUserId(userId, skip, limit) {
@@ -37,40 +47,65 @@ export class OrderService {
 
   async create(user: AccountEntity, data: OrderEntity) {
     try {
-      const m = new OrderEntity()
-      m.title = data.title
-      m.status = OrderStatus.Open
-      m.created_at = new Date()
-      m.updated_at = new Date()
-      m.creator = user
-      m.members = [user]
+      await getManager().transaction(async tm => {
+        let m = new OrderEntity()
+        m.title = data.title
+        m.status = OrderStatus.Open
+        m.created_at = new Date()
+        m.updated_at = new Date()
+        m.creator = user
+        m.members = [user]
+        m.products = []
+        m = await tm.save(data)
 
-      await this.repo.save(data)
+        for (const p of data.products) {
+          let pm = new ProductEntity()
+          pm.name = p.name
+          pm.select_mode = p.select_mode
+          pm.unit_price = p.unit_price
+          pm.created_at = new Date()
+          pm = await tm.save(pm)
+          m.products.push(pm)
+        }
+
+        await tm.save(m)
+      })
     } catch (err) {
       throw new InternalServerErrorException(err)
     }
   }
 
   async show(id: number) {
-    try {
-      const item = await this.repo.findOne(
-        {
-          id
-        },
-        {
-          relations: ["creator", "members", "products"]
-        }
-      )
+    let res: any = {}
 
-      if (!item) {
-        throw new NotFoundException()
-      }
+    try {
+      const item = await this.repo.findOne(id, {
+        relations: ["creator", "members", "products"]
+      })
 
       if (item == null) {
         throw new NotFoundException()
       }
 
-      return item
+      res = item
+
+      const resProducts = []
+      for (const p of item.products) {
+        const pms = await this.pmRepo
+          .createQueryBuilder("pm")
+          .leftJoinAndSelect("pm.account", "account")
+          .getMany()
+
+        const pp = {
+          ...p,
+          members: pms
+        }
+
+        resProducts.push(pp)
+      }
+      res.products = resProducts
+
+      return res
     } catch (err) {
       throw new InternalServerErrorException(err)
     }

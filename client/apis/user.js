@@ -12,4 +12,11 @@ module.exports = class UserAPI {
   static login(code) {
     return fetch("POST", "/session/", { code })
   }
+
+  // 更新用户名和头像到后端
+  static updateNameAvatar(name, avatar_url) {
+    return fetch("PUT", `/session/`, {
+      name, avatar_url
+    })
+  }
 }

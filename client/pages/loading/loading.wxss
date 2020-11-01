@@ -1,0 +1,5 @@
+/* pages/loading/loading.wxss */
+.loading {
+  margin: 100rpx;
+  text-align: center;
+}

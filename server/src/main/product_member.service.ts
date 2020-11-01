@@ -19,7 +19,7 @@ export class ProductMemberService {
     private readonly repo: Repository<ProductMemberEntity>
   ) {}
 
-  async create(
+  async createOrUpdate(
     order_id: number,
     product_id: number,
     account_id: number,
@@ -33,28 +33,6 @@ export class ProductMemberService {
       m.buy_number = buy_number
 
       await this.repo.save(m)
-    } catch (err) {
-      throw new InternalServerErrorException(err)
-    }
-  }
-
-  async updateBuyNumber(
-    product_id: number,
-    account_id: number,
-    buy_number: number
-  ) {
-    try {
-      const p = await this.repo.findOne({
-        product: { id: product_id },
-        account: { id: account_id }
-      })
-
-      if (!p) {
-        throw new NotFoundException()
-      }
-
-      p.buy_number = buy_number
-      await this.repo.save(p)
     } catch (err) {
       throw new InternalServerErrorException(err)
     }
@@ -79,5 +57,12 @@ export class ProductMemberService {
 
       throw new InternalServerErrorException(err)
     }
+  }
+
+  async sumByOrderId(order_id: number) {
+    const pms = await this.repo.find({
+      order: { id: order_id }
+    })
+    return pms.reduce((t, i) => t + i.buy_number, 0)
   }
 }

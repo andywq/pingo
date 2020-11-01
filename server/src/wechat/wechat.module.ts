@@ -9,6 +9,8 @@ import { AccountModule } from "../account/account.module"
 import { ConfigService } from "../config/config.service"
 import { OrderController } from "./order.controller"
 import { OrderService } from "src/main/order.service"
+import { ProductService } from "src/main/product.service"
+import { ProductMemberService } from "src/main/product_member.service"
 
 @Module({
   imports: [
@@ -19,7 +21,13 @@ import { OrderService } from "src/main/order.service"
     MainModule,
     AccountModule
   ],
-  providers: [AuthService, JwtStrategy, OrderService],
+  providers: [
+    AuthService,
+    JwtStrategy,
+    OrderService,
+    ProductService,
+    ProductMemberService
+  ],
   controllers: [SessionController, OrderController]
 })
 export class WechatModule {}

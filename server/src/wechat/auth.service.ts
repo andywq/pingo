@@ -47,7 +47,7 @@ export class AuthService {
       // 用户不存在，创建一个
       if (account == null) {
         account = new AccountEntity()
-        account.name = "微信用户"
+        account.name = ""
         account.wx_open_id = wechatResp.data.openid
         account.avatar_url = ""
         account.created_at = new Date()

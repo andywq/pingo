@@ -18,14 +18,14 @@ export class ProductService {
     private readonly repo: Repository<ProductEntity>
   ) {}
 
-  async create(order: OrderEntity, product: ProductEntity) {
+  async create(orderId: number, product: ProductEntity) {
     try {
       await getManager().transaction(async em => {
         const p = new ProductEntity()
         p.name = product.name
         p.select_mode = product.select_mode
         p.unit_price = product.unit_price
-        p.order = order
+        p.order = { id: orderId } as any
         p.created_at = new Date()
         p.updated_at = new Date()
         await em.save(p)
