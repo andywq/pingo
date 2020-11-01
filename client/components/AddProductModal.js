@@ -31,7 +31,7 @@ Component({
       selectModeIndex: 0
     },
 
-    myNumber: 0
+    buy_number: 0
   },
 
   methods: {
@@ -53,7 +53,7 @@ Component({
 
       this.triggerEvent("submit", {
         ...this.data.product,
-        _my_number: this.data.myNumber
+        _my_number: this.data.buy_number
       })
     },
     handleSelectModeChange(e) {
@@ -92,7 +92,7 @@ Component({
       }
 
       this.setData({
-        "myNumber": n
+        "buy_number": n
       })
     },
   },
@@ -106,10 +106,10 @@ Component({
     "data": function(data) {
       if (!!data) {
         if (!!data.members) {
-          const m = data.members.find(v => v.id == app.globalData.account.id)
+          const m = data.members.find(v => v.account.id == app.globalData.account.id)
           if (!!m) {
             this.setData({
-              myNumber: m.number
+              buy_number: m.buy_number
             })
           }
         }

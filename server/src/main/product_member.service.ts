@@ -59,10 +59,13 @@ export class ProductMemberService {
     }
   }
 
-  async sumByOrderId(order_id: number) {
-    const pms = await this.repo.find({
-      order: { id: order_id }
-    })
+  async sumByOrderId(orderId: number) {
+    const pms = await this.repo
+      .createQueryBuilder("pm")
+      .where("order_id = :orderId", {
+        orderId
+      })
+      .getMany()
     return pms.reduce((t, i) => t + i.buy_number, 0)
   }
 }

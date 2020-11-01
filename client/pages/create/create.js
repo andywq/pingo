@@ -1,6 +1,9 @@
 // pages/create/create.js
 const OrderAPI = require("../../apis/order")
-const { navigateBackOrIndex, sleep } = require("../../utils/util")
+const {
+  navigateBackOrIndex,
+  sleep
+} = require("../../utils/util")
 
 Page({
   data: {
@@ -27,21 +30,25 @@ Page({
 
   handleSubmit: async function () {
     try {
-      await wx.showLoading({mask: true})
+      await wx.showLoading({
+        mask: true
+      })
       await OrderAPI.create({
         title: this.data.title,
         products: this.data.products
       })
+
+      navigateBackOrIndex()
     } catch (e) {
       wx.showToast({
         title: '提交失败请重试',
+        icon: "none"
       })
       return
     } finally {
       wx.hideLoading()
     }
 
-    navigateBackOrIndex()
   },
 
   handleTitleInput: function (e) {
@@ -69,7 +76,6 @@ Page({
     this.setData({
       products: this.data.products
     })
-    console.log(this.data.products)
   },
 
   // 处理产品数据更新

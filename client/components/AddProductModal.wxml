@@ -39,10 +39,10 @@
       </view>
     </view>
 
-    <view class="form-item" wx:if="{{data}}">
+    <view wx:if="{{data}}"  class="form-item" wx:if="{{data}}">
       <view class="form-item-title">我的购买数量：</view>
       <view class="form-item-content">
-        <input type="number" value="{{myNumber}}" bindblur="handleMyNumberInput"
+        <input type="number" value="{{buy_number}}" bindblur="handleMyNumberInput"
           placeholder-class="form-item-input-placeholder" placeholder="购买数量" />
       </view>
     </view>

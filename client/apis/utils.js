@@ -1,9 +1,8 @@
-
 // const apiEndpoint = "https://api.pingo.alexyan.cc"
 // const apiEndpoint = "http://api.alexyan.cc/mock/104"
 const apiEndpoint = "http://127.0.0.1:8080/api/wechat"
 
-exports.fetch = function(method, url, data) {
+exports.fetch = function (method, url, data) {
 
   const app = getApp();
   const header = {}
@@ -22,7 +21,13 @@ exports.fetch = function(method, url, data) {
       header,
       url: `${apiEndpoint}${url}`,
       data,
-      success: r => res(r.data),
+      success: r => {
+        if (r.statusCode >= 400) {
+          rej(r.data)
+          return
+        }
+        res(r.data)
+      },
       fail: rej
     })
   })

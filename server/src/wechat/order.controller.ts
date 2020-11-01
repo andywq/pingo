@@ -84,6 +84,14 @@ export class OrderController {
     return this.orderServ.remove(id)
   }
 
+  @Post("/:id/close")
+  @UseGuards(AuthGuard())
+  async close(@Param("id", ParseIntPipe) id) {
+    const m = await this.orderServ.show(id)
+    m.status = OrderStatus.Closed
+    return this.orderServ.update(m)
+  }
+
   // 订单商品
   @Post("/:id/product")
   @UseGuards(AuthGuard())

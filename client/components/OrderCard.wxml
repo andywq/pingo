@@ -12,15 +12,15 @@
         {{createdAt}}
       </view>
       <view class="price">
-        ￥{{totalPrice}}
+        ￥{{data.total}}
       </view>
     </view>
   </view>
 
-  <view class="members" wx:if="{{members.length > 0}}">
+  <view class="members" wx:if="{{data.members.length > 0}}">
     <view class="sep"></view>
     <view class="images">
-      <image class="member" wx:for="{{members}}" wx:key="index" src="{{item.avatar}}"></image>
+      <image class="member" wx:for="{{data.members}}" wx:key="index" src="{{item.avatar_url}}"></image>
     </view>
   </view>
 </view>

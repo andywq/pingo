@@ -41,7 +41,7 @@ export class OrderEntity {
   })
   products: ProductEntity[]
 
-  @ManyToOne(type => AccountEntity, { cascade: false, eager: true })
+  @ManyToOne(type => AccountEntity, { cascade: false })
   @JoinColumn({ name: "creator_id" })
   creator: AccountEntity
 

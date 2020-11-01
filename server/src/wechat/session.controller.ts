@@ -45,7 +45,7 @@ export class SessionController {
 
       return this.accServ.saveOrUpdate(u)
     } catch (err) {
-      console.log(err)
+      console.error(err)
       throw new InternalServerErrorException(err)
     }
   }

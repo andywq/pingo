@@ -26,9 +26,9 @@
     <view class="sep"></view>
     <view class="infos">
       <view class="member" wx:for="{{data.members}}" wx:key="index">
-        <image class="member-avatar"  src="{{item.avatar}}"></image>
+        <image class="member-avatar"  src="{{item.account.avatar_url}}"></image>
         <view class="number">
-          *{{item.number}}
+          *{{item.buy_number}}
         </view>
       </view>
     </view>

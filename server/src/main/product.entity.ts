@@ -19,6 +19,9 @@ export class ProductEntity {
   name: string
 
   @Column()
+  desc: string
+
+  @Column()
   unit_price: number
 
   @Column()

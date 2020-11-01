@@ -44,6 +44,14 @@ module.exports = class OrderAPI {
   }
 
   /**
+   * 添加订单中的商品
+   * @param {string} orderId 
+   * @param {any} product 
+   */
+  static addProduct(orderId, product) {
+    return fetch("POST", `/order/${orderId}/product/`, product)
+  }
+  /**
    * 删除订单中的商品
    * @param {string} orderId 
    * @param {string} productId 
@@ -71,9 +79,11 @@ module.exports = class OrderAPI {
    * 更新我的商品选购数量
    * @param {string} orderId 
    * @param {string} productId 
-   * @param {number} myNumber 
+   * @param {number} buy_number 
    */
-  static updateMyProductSelectNumber(orderId, productId, myNumber) {
-    return fetch("PUT", `/order/${orderId}/product/${productId}/my_number/${myNumber}`)
+  static updateMyProductSelectNumber(orderId, productId, buy_number) {
+    return fetch("PUT", `/order/${orderId}/product/${productId}/member`, {
+      buy_number
+    })
   }
 }

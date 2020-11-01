@@ -1,11 +1,11 @@
 const UserAPI = require("../../apis/user")
 const WechatAPI = require("../../apis/wechat")
-const app = getApp()
 
 // pages/loading/loading.js
 Page({
   onReady: async function () {
-    if (app.globalData.account.name) {
+    const app = getApp()
+    if (app.globalData.account && app.globalData.account.name) {
       wx.navigateTo({
         url: "/pages/index/index"
       })

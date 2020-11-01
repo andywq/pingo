@@ -35,6 +35,6 @@ export class ProductMemberEntity {
   @JoinColumn({ name: "order_id" })
   order: OrderEntity
 
-  @Column({ type: "decimal" })
+  @Column({ type: "double" })
   buy_number: number // 购买数量
 }

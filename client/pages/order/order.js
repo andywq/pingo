@@ -26,7 +26,7 @@ Page({
       "id": options.id
     })
   },
-  onReady: function () {
+  onShow: function () {
     this.refresh()
   },
   onPullDownRefresh: function () {
@@ -40,6 +40,15 @@ Page({
     try {
       const order = await OrderAPI.show(this.data.id)
       const readonly = order.status === "closed"
+
+      let total = 0
+      for (const p of order.products) {
+        for (const m of p.members) {
+          total += m.buy_number
+        }
+      }
+      order.total = total
+
       this.setData({
         order,
         readonly
@@ -64,7 +73,7 @@ Page({
 
         try {
           wx.showLoading()
-          await OrderAPI.close(this.id)
+          await OrderAPI.close(this.data.id)
           navigateBackOrIndex()
         } catch (err) {
           console.log(err)
@@ -89,7 +98,7 @@ Page({
       isAddModalVisiable: false
     })
   },
-  handleSubmitAddModal: function (v) {
+  handleSubmitAddModal: async function (v) {
     this.setData({
       isAddModalVisiable: false
     })
@@ -97,6 +106,21 @@ Page({
     this.setData({
       "order.products": this.data.order.products
     })
+
+    if (this.data.id) {
+      // TODO 提交更新
+      wx.showLoading()
+      try {
+        await OrderAPI.addProduct(this.data.id, v.detail)
+      } catch (err) {
+        console.error(err)
+        wx.showToast({
+          title: '更新失败，请重试',
+        })
+      }
+      wx.hideLoading()
+      this.refresh()
+    }
   },
 
   // 处理产品数据更新
@@ -120,16 +144,16 @@ Page({
 
     try {
       wx.showLoading()
-      await OrderAPI.updateProductInfo(this.data.id, v.detail._id, v.detail)
-      await OrderAPI.updateMyProductSelectNumber(this.data.id, v.detail._id, v.detail._my_number)
+      await OrderAPI.updateProductInfo(this.data.id, v.detail.id, v.detail)
+      await OrderAPI.updateMyProductSelectNumber(this.data.id, v.detail.id, v.detail._my_number)
     } catch (error) {
       console.error(error)
       wx.showToast({
         title: '更新失败，请重试',
       })
-    } finally {
-      wx.hideLoading()
     }
+    wx.hideLoading()
+    this.refresh()
   },
   handleDeleteModifyModal: async function (v) {
     const p = v.detail

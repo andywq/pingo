@@ -25,12 +25,14 @@ export class ProductService {
         p.name = product.name
         p.select_mode = product.select_mode
         p.unit_price = product.unit_price
+        p.desc = product.desc
         p.order = { id: orderId } as any
         p.created_at = new Date()
         p.updated_at = new Date()
         await em.save(p)
       })
     } catch (err) {
+      console.error(err)
       throw new InternalServerErrorException(err)
     }
   }
@@ -46,6 +48,7 @@ export class ProductService {
       p.name = data.name
       p.select_mode = data.select_mode
       p.unit_price = data.unit_price
+      p.desc = data.desc
 
       await this.repo.save(p)
     } catch (err) {

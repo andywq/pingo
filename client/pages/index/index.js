@@ -40,12 +40,14 @@ Page({
     const i = e.target.dataset.index
     const o = this.data.orders[i]
     wx.navigateTo({
-      url: `/pages/order/order?id=${o._id}`,
+      url: `/pages/order/order?id=${o.id}`,
     })
   },
 
   // 生命周期
   onReady: function () {
+  },
+  onShow: function() {
     this.refreshOrders()
   },
   onPullDownRefresh: function () {

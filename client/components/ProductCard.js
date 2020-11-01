@@ -24,15 +24,15 @@ Component({
       if (!d || !d.members) {
         return
       }
-      let number = 0
+      let totalNumber = 0
       for (const m of d.members) {
-        number += m.number
+        totalNumber += m.buy_number
       }
-      number = parseFloat(number.toFixed(4))
+      totalNumber = parseFloat(totalNumber.toFixed(4))
 
       this.setData({
-        "totalNumber": number,
-        "totalPrice": parseFloat((number * d.unit_price).toFixed(4))
+        "totalNumber": totalNumber,
+        "totalPrice": parseFloat((totalNumber * d.unit_price).toFixed(4))
       })
     }
   }

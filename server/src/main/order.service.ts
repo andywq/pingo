@@ -31,14 +31,16 @@ export class OrderService {
     try {
       orders = await this.repo
         .createQueryBuilder("order")
+        .leftJoinAndSelect("order.creator", "c")
         .leftJoinAndSelect("order.members", "account")
         .where("account.id = :userId", { userId })
-        .addOrderBy("status", "DESC")
-        .addOrderBy("created_at", "DESC")
+        .orderBy("order.status", "DESC")
+        .addOrderBy("order.created_at", "DESC")
         .skip(skip)
         .limit(limit)
         .getMany()
     } catch (err) {
+      console.error(err)
       throw new InternalServerErrorException(err)
     }
 
@@ -56,7 +58,7 @@ export class OrderService {
         m.creator = user
         m.members = [user]
         m.products = []
-        m = await tm.save(data)
+        m = await tm.save(m)
 
         for (const p of data.products) {
           let pm = new ProductEntity()
@@ -64,6 +66,7 @@ export class OrderService {
           pm.select_mode = p.select_mode
           pm.unit_price = p.unit_price
           pm.created_at = new Date()
+          pm.updated_at = new Date()
           pm = await tm.save(pm)
           m.products.push(pm)
         }
@@ -71,6 +74,7 @@ export class OrderService {
         await tm.save(m)
       })
     } catch (err) {
+      console.error(err)
       throw new InternalServerErrorException(err)
     }
   }
@@ -94,6 +98,9 @@ export class OrderService {
         const pms = await this.pmRepo
           .createQueryBuilder("pm")
           .leftJoinAndSelect("pm.account", "account")
+          .where("pm.product_id = :product_id", {
+            product_id: p.id
+          })
           .getMany()
 
         const pp = {
@@ -107,6 +114,7 @@ export class OrderService {
 
       return res
     } catch (err) {
+      console.error(err)
       throw new InternalServerErrorException(err)
     }
   }
@@ -114,9 +122,10 @@ export class OrderService {
   // 只允许更新 title
   async update(data: OrderEntity) {
     try {
-      const m = await this.show(data.id)
+      const m = await this.repo.findOne(data.id)
       m.updated_at = new Date()
       m.title = data.title
+      m.status = data.status
 
       this.repo.save(m)
     } catch (err) {
@@ -126,14 +135,9 @@ export class OrderService {
 
   async addMember(id: number, user: AccountEntity) {
     try {
-      const order = await this.repo.findOne(
-        {
-          id
-        },
-        {
-          relations: ["members"]
-        }
-      )
+      const order = await this.repo.findOne(id, {
+        relations: ["members"]
+      })
 
       const item = await this.show(id)
       item.updated_at = new Date()
