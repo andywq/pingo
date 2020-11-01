@@ -1,18 +1,16 @@
-// const apiEndpoint = "https://api.pingo.alexyan.cc"
-// const apiEndpoint = "http://api.alexyan.cc/mock/104"
-const apiEndpoint = "http://127.0.0.1:8080/api/wechat"
+const apiEndpoint = "https://api.pingo.alexyan.cc/api/wechat";
+// const apiEndpoint = "http://127.0.0.1:8080/api/wechat"
 
 exports.fetch = function (method, url, data) {
-
   const app = getApp();
-  const header = {}
+  const header = {};
 
   if (method != "GET") {
-    header["Content-Type"] = "application/json"
+    header["Content-Type"] = "application/json";
   }
 
   if (app.globalData.accessToken) {
-    header["Authorization"] = `Bearer ${app.globalData.accessToken}`
+    header["Authorization"] = `Bearer ${app.globalData.accessToken}`;
   }
 
   return new Promise((res, rej) => {
@@ -21,14 +19,14 @@ exports.fetch = function (method, url, data) {
       header,
       url: `${apiEndpoint}${url}`,
       data,
-      success: r => {
+      success: (r) => {
         if (r.statusCode >= 400) {
-          rej(r.data)
-          return
+          rej(r.data);
+          return;
         }
-        res(r.data)
+        res(r.data);
       },
-      fail: rej
-    })
-  })
-}
+      fail: rej,
+    });
+  });
+};

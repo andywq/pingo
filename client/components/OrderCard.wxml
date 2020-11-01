@@ -11,6 +11,9 @@
       <view class="date">
         {{createdAt}}
       </view>
+      <view class="sharecode">
+        拼单号 {{data.share_code}}
+      </view>
       <view class="price">
         ￥{{data.total}}
       </view>

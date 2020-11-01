@@ -47,6 +47,21 @@ export class OrderService {
     return orders
   }
 
+  async join(user: AccountEntity, share_code: string) {
+    const item = await this.repo.findOne(
+      {
+        share_code
+      },
+      {
+        relations: ["members"]
+      }
+    )
+
+    item.members.push(user)
+
+    return this.repo.save(item)
+  }
+
   async create(user: AccountEntity, data: OrderEntity) {
     try {
       await getManager().transaction(async tm => {
@@ -174,32 +189,6 @@ export class OrderService {
       "7",
       "8",
       "9",
-      "a",
-      "b",
-      "c",
-      "d",
-      "e",
-      "f",
-      "g",
-      "h",
-      "i",
-      "j",
-      "k",
-      "l",
-      "m",
-      "n",
-      "o",
-      "p",
-      "q",
-      "r",
-      "s",
-      "t",
-      "u",
-      "v",
-      "w",
-      "x",
-      "y",
-      "z",
       "A",
       "B",
       "C",

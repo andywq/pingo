@@ -47,6 +47,13 @@
   right: 24rpx;
 }
 
+.sharecode {
+  position: absolute;
+  top: 62rpx;
+  right: 24rpx;
+  font-size: 22rpx;
+  color: #3e468566;
+}
 .members {
   margin-bottom: -18rpx;
 }

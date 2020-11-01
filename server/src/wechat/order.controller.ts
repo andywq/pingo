@@ -65,6 +65,12 @@ export class OrderController {
     return this.orderServ.create(request.user, data)
   }
 
+  @Post("/join")
+  @UseGuards(AuthGuard())
+  join(@Req() request: IRequest, @Body() data: { code: string }) {
+    return this.orderServ.join(request.user, data.code)
+  }
+
   @Get("/:id")
   @UseGuards(AuthGuard())
   show(@Param("id", ParseIntPipe) id: number) {
