@@ -1,4 +1,10 @@
-node_modules
-package-lock.json
-config.*.json
+.vscode
+node_modules/
+dist/
+development.json
+test.json
+.http/
+.sql/
+.pm2/
+yarn.lock
 .data

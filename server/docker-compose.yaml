@@ -1,10 +1,13 @@
 version: "3.1"
 
 services:
-  mongo:
-    image: mongo:latest
+  mysql:
+    image: mysql:5.7
+    command: --default-authentication-plugin=mysql_native_password
     restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 123
     ports:
-      - 27017:27017
+      - 3306:3306
     volumes:
-      - .data/mongodb:/data/db
+      - .data/mysql:/var/lib/mysql
