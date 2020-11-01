@@ -7,7 +7,17 @@ App({
     wx.login({
       success: async res => {
         // 发送 res.code 到后台换取 sessionKey, unionId: id
-        this.globalData.session = await UserAPI.login(res.code)
+        try {
+          const { jwt_token, user } = await UserAPI.login(res.code)
+          this.globalData.session = jwt_token
+          this.globalData.userInfo = user
+        } catch (error) {
+          console.error(error)
+          wx.showModal({
+            title: "登录失败",
+            content: JSON.stringify(error)
+          })
+        }
       }
     })
     // // 获取用户信息

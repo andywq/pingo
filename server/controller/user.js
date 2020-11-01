@@ -1,19 +1,31 @@
 const Router = require("@koa/router")
+const { default: fetch } = require("axios")
+
 const { User } = require("../model/user")
 const { genJwtToken } = require("../lib/jwt")
 const config = require("../lib/config")
 
 const UserRouter = new Router()
 
+const WECHAT_CODE_TO_SESSION_URL = "https://api.weixin.qq.com/sns/jscode2session"
+
 // POST /user/login
 UserRouter.post("/login", async (ctx) => {
   const { code } = ctx.request.body
-  // === const code = ctx.request.body.code
-
-  // TODO 使用临时 code，从腾讯服务器获取用户 OpenId，获取失败时报错登陆失败
-  const open_id = "mock111"
 
   try {
+    const wechatResp = await fetch
+      .get(WECHAT_CODE_TO_SESSION_URL, {
+        params: {
+          appid: config.wechat_app_id,
+          secret: config.wechat_secret,
+          js_code: code,
+          grand_type: "authorization_code",
+        },
+      })
+      .then((res) => res.data)
+    const { openid: open_id } = wechatResp
+
     let user = await User.findOne({
       open_id,
     }).exec()
@@ -30,7 +42,7 @@ UserRouter.post("/login", async (ctx) => {
     // 查不到用户，说明用户第一次登陆，向数据库中插入信息
     const newUser = new User({
       open_id,
-      name: "",
+      name: `用户${open_id}`,
       avatar: "",
     })
 

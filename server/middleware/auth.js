@@ -8,7 +8,7 @@ const config = require("../lib/config")
  */
 module.exports = async (ctx, next) => {
   // 登陆页面无需鉴权
-  if (ctx.request.url === "/user/login" && ctx.request.method === "POST") {
+  if (ctx.request.path === "/user/login" && ctx.request.method === "POST") {
     await next()
     return
   }

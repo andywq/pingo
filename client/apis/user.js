@@ -1,4 +1,4 @@
-const { apiEndpoint } = require("./utils")
+const { fetch } = require("./utils")
 
 module.exports = class UserAPI {
   /**
@@ -11,15 +11,6 @@ module.exports = class UserAPI {
    * }>}
    */
   static login(code) {
-    return new Promise((res, rej) => {
-      wx.request({
-        url: `${apiEndpoint}/v1/login`,
-        data: {
-          code
-        },
-        success: r => res(r.data),
-        fail: rej
-      })
-    })
+    return fetch("POST", "/user/login", { code })
   }
 }

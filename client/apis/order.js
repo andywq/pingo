@@ -1,4 +1,4 @@
-const { apiEndpoint } = require("./utils")
+const { fetch } = require("./utils")
 
 module.exports = class OrderAPI {
   /**
@@ -7,18 +7,7 @@ module.exports = class OrderAPI {
    * @param {number} skip 
    */
   static list(limit, skip) {
-    return new Promise((res, rej) => {
-      wx.request({
-        method: "GET",
-        url: `${apiEndpoint}/v1/order`,
-        data: {
-          limit,
-          skip
-        },
-        success: r => res(r.data),
-        fail: rej
-      })
-    })
+    return fetch("GET", "/order", {limit, skip})
   }
 
   /**
@@ -26,14 +15,7 @@ module.exports = class OrderAPI {
    * @param {string} id 
    */
   static show(id) {
-    return new Promise((res, rej) => {
-      wx.request({
-        method: "GET",
-        url: `${apiEndpoint}/v1/order/${id}`,
-        success: r => res(r.data),
-        fail: rej
-      })
-    })
+    return fetch("GET", `/order/${id}`)
   }
 
   /**
@@ -42,15 +24,7 @@ module.exports = class OrderAPI {
    * @returns {Promise<void>}
    */
   static create(order) {
-    return new Promise((res, rej) => {
-      wx.request({
-        method: "POST",
-        url: `${apiEndpoint}/v1/order`,
-        data: order,
-        success: r => res(r.data),
-        fail: rej
-      })
-    })
+    return fetch("POST", `/order`, order)
   }
 
   /**
@@ -58,14 +32,7 @@ module.exports = class OrderAPI {
    * @param {string} orderId 
    */
   static close(orderId) {
-    return new Promise((res, rej) => {
-      wx.request({
-        method: "POST",
-        url: `${apiEndpoint}/v1/order/${orderId}/close`,
-        success: r => res(r.data),
-        fail: rej
-      })
-    })
+    return fetch("POST", `/order/${orderId}/close`)
   }
 
   /**
@@ -73,17 +40,7 @@ module.exports = class OrderAPI {
    * @param {string} code 
    */
   static join(code) {
-    return new Promise((res, rej) => {
-      wx.request({
-        method: "POST",
-        url: `${apiEndpoint}/v1/order/join`,
-        data: {
-          code
-        },
-        success: r => res(r.data),
-        fail: rej
-      })
-    })
+    return fetch("POST", `/order/join`, { code })
   }
 
   /**
@@ -92,14 +49,7 @@ module.exports = class OrderAPI {
    * @param {string} productId 
    */
   static deleteProduct(orderId, productId) {
-    return new Promise((res, rej) => {
-      wx.request({
-        method: "DELETE",
-        url: `${apiEndpoint}/v1/order/${orderId}/product/${productId}`,
-        success: r => res(r.data),
-        fail: rej
-      })
-    })
+    return fetch("DELETE", `/order/${orderId}/product/${productId}`)
   }
 
   /**
@@ -109,19 +59,11 @@ module.exports = class OrderAPI {
    * @param {string} info 
    */
   static updateProductInfo(orderId, productId, info) {
-    return new Promise((res, rej) => {
-      wx.request({
-        method: "PATCH",
-        url: `${apiEndpoint}/v1/order/${orderId}/product/${productId}`,
-        data: {
-          name: info.name,
-          desc: info.desc,
-          unit_price: info.unit_price,
-          select_mode: info.select_mode
-        },
-        success: r => res(r.data),
-        fail: rej
-      })
+    return fetch("PATCH", `/order/${orderId}/product/${productId}`, {
+      name: info.name,
+      desc: info.desc,
+      unit_price: info.unit_price,
+      select_mode: info.select_mode
     })
   }
 
@@ -132,13 +74,6 @@ module.exports = class OrderAPI {
    * @param {number} myNumber 
    */
   static updateMyProductSelectNumber(orderId, productId, myNumber) {
-    return new Promise((res, rej) => {
-      wx.request({
-        method: "PATCH",
-        url: `${apiEndpoint}/v1/order/${orderId}/product/${productId}/my_number/${myNumber}`,
-        success: r => res(r.data),
-        fail: rej
-      })
-    })
+    return fetch("PATCH", `/order/${orderId}/product/${productId}/my_number/${myNumber}`)
   }
 }
