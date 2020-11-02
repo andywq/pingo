@@ -15,12 +15,11 @@ import {
 } from "@nestjs/common"
 import { OrderEntity, OrderStatus } from "../main/order.entity"
 import { AuthGuard } from "@nestjs/passport"
-import { OrderService } from "src/main/order.service"
+import { OrderService } from "../main/order.service"
 import { IRequest } from "./interfaces"
-import { ProductService } from "src/main/product.service"
-import { ProductMemberService } from "src/main/product_member.service"
-import { ProductEntity } from "src/main/product.entity"
-import { idText } from "typescript"
+import { ProductService } from "../main/product.service"
+import { ProductMemberService } from "../main/product_member.service"
+import { ProductEntity } from "../main/product.entity"
 
 @Controller("/api/wechat/order")
 export class OrderController {

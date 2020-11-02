@@ -1,4 +1,4 @@
-import { AccountEntity } from "src/account/account.entity"
+import { AccountEntity } from "../account/account.entity"
 import {
   Entity,
   Column,
@@ -39,9 +39,13 @@ export class OrderEntity {
   @Column()
   share_code: string
 
-  @OneToMany(type => ProductEntity, product => product.order, {
-    cascade: false
-  })
+  @OneToMany(
+    type => ProductEntity,
+    product => product.order,
+    {
+      cascade: false
+    }
+  )
   products: ProductEntity[]
 
   @ManyToOne(type => AccountEntity, { cascade: false })

@@ -12,7 +12,7 @@ import {
 import { AuthService } from "./auth.service"
 import { AuthGuard } from "@nestjs/passport"
 import { IRequest } from "./interfaces"
-import { AccountService } from "src/account/account.service"
+import { AccountService } from "../account/account.service"
 
 @Controller("/api/wechat/session")
 export class SessionController {

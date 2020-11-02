@@ -1,14 +1,13 @@
 import {
   Injectable,
   Inject,
-  InternalServerErrorException,
-  UnauthorizedException
+  InternalServerErrorException
 } from "@nestjs/common"
 import { JwtService } from "@nestjs/jwt"
 import { AccountEntity } from "../account/account.entity"
 import { AccountService } from "../account/account.service"
+import { ConfigService } from "../config/config.service"
 import axios from "axios"
-import { ConfigService } from "src/config/config.service"
 
 @Injectable()
 export class AuthService {

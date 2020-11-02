@@ -8,9 +8,9 @@ import { MainModule } from "../main/main.module"
 import { AccountModule } from "../account/account.module"
 import { ConfigService } from "../config/config.service"
 import { OrderController } from "./order.controller"
-import { OrderService } from "src/main/order.service"
-import { ProductService } from "src/main/product.service"
-import { ProductMemberService } from "src/main/product_member.service"
+import { OrderService } from "../main/order.service"
+import { ProductService } from "../main/product.service"
+import { ProductMemberService } from "../main/product_member.service"
 
 @Module({
   imports: [

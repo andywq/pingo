@@ -1,13 +1,10 @@
 import {
   Injectable,
-  Inject,
   NotFoundException,
   InternalServerErrorException
 } from "@nestjs/common"
 import { InjectRepository } from "@nestjs/typeorm"
-import { Repository, Transaction, TransactionRepository } from "typeorm"
-import { IProduct, OrderEntity } from "./order.entity"
-import { AccountEntity } from "src/account/account.entity"
+import { Repository } from "typeorm"
 import { ProductEntity } from "./product.entity"
 import { getManager } from "typeorm"
 

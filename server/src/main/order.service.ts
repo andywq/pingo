@@ -12,7 +12,7 @@ import {
   TransactionRepository
 } from "typeorm"
 import { IProduct, OrderEntity, OrderStatus } from "./order.entity"
-import { AccountEntity } from "src/account/account.entity"
+import { AccountEntity } from "../account/account.entity"
 import { ProductEntity } from "./product.entity"
 import { ProductMemberService } from "./product_member.service"
 import { ProductMemberEntity } from "./product_member.entity"
