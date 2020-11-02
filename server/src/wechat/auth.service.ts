@@ -54,7 +54,8 @@ export class AuthService {
         account = await this.accountService.saveOrUpdate(account)
       }
     } catch (e) {
-      throw new InternalServerErrorException()
+      console.error(e)
+      throw new InternalServerErrorException(e)
     }
 
     const payload = JSON.parse(JSON.stringify(account))
