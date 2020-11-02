@@ -3,3 +3,11 @@
   margin: 100rpx;
   text-align: center;
 }
+.loading image {
+  width: 200rpx;
+}
+page {
+  color: #3d4785;
+  background: #f3f8fe;
+  /* height: 100%; */
+}

@@ -15,6 +15,9 @@
     <view class="actions" wx:if="{{order.status == 'open'}}">
       <button class="add-btn" bindtap="handleAddProduct">添加商品</button>
     </view>
+    <view class="actions" wx:if="{{order.status == 'closed'}}">
+      <button class="add-btn" bindtap="handleExportOrder">导出订单</button>
+    </view>
 
   </view>
 </view>

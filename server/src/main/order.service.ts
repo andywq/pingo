@@ -98,7 +98,7 @@ export class OrderService {
   }
 
   async show(id: number) {
-    let res: any = {}
+    let res: OrderEntity
 
     try {
       const item = await this.repo.findOne(id, {
@@ -147,6 +147,7 @@ export class OrderService {
 
       this.repo.save(m)
     } catch (err) {
+      console.error(err)
       throw new InternalServerErrorException(err)
     }
   }
@@ -157,12 +158,12 @@ export class OrderService {
         relations: ["members"]
       })
 
-      const item = await this.show(id)
-      item.updated_at = new Date()
-      item.members.push(user)
+      order.updated_at = new Date()
+      order.members.push(user)
 
-      await this.repo.save(item)
+      await this.repo.save(order)
     } catch (err) {
+      console.error(err)
       throw new InternalServerErrorException(err)
     }
   }
@@ -172,6 +173,7 @@ export class OrderService {
       const item = await this.show(id)
       await this.repo.remove(item)
     } catch (err) {
+      console.error(err)
       throw new InternalServerErrorException(err)
     }
   }

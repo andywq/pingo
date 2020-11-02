@@ -11,3 +11,8 @@
 input{
   -webkit-user-select:text !important;
 }
+page {
+  color: #3d4785;
+  background: #f3f8fe;
+  /* height: 100%; */
+}

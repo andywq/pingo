@@ -20,6 +20,12 @@ Page({
     modifyProductIndex: -1
   },
 
+  onReady: function () {
+    wx.showShareMenu({
+      withShareTicket: true,
+      menus: ['shareAppMessage', 'shareTimeline']
+    })
+  },
   onLoad: function (options) {
     console.log(options)
     this.setData({
@@ -85,6 +91,47 @@ Page({
         }
       }
     })
+  },
+
+  handleExportOrder: function () {
+    console.log("export")
+    // TODO 获取数据
+    const data = "sadfsadfsa"
+
+    const fileName = `拼购_${this.data.order.title}_${new Date().getTime()}.csv`
+
+    const fm = wx.getFileSystemManager()
+    const filePath = wx.env.USER_DATA_PATH + "/" + fileName
+    console.log(filePath)
+    fm.writeFile({
+      data,
+      filePath,
+      encoding: "utf-8",
+      success: (r) => {
+        wx.showToast({
+          title: '导出成功',
+        })
+
+        wx.openDocument({
+          filePath,
+          showMenu: true,
+          fileType: "xls",
+          success: () => {
+            console.log("打开成功")
+          },
+          fail: err => {
+            console.log("打开失败", err)
+          }
+        })
+      },
+      fail: () => {
+        wx.showToast({
+          title: '导出失败',
+          icon: "none"
+        })
+      }
+    })
+
   },
 
   // 新增商品模态框

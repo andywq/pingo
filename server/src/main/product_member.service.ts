@@ -29,6 +29,7 @@ export class ProductMemberService {
 
       await this.repo.save(m)
     } catch (err) {
+      console.error(err)
       throw new InternalServerErrorException(err)
     }
   }
@@ -50,6 +51,7 @@ export class ProductMemberService {
         throw err
       }
 
+      console.error(err)
       throw new InternalServerErrorException(err)
     }
   }

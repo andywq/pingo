@@ -46,8 +46,13 @@ Page({
 
   // 生命周期
   onReady: function () {
+    wx.showShareMenu({
+      withShareTicket: true,
+      menus: ['shareAppMessage', 'shareTimeline']
+    })
   },
-  onShow: function() {
+  
+  onShow: function () {
     this.refreshOrders()
   },
   onPullDownRefresh: function () {

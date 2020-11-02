@@ -72,8 +72,15 @@ export class OrderController {
 
   @Get("/:id")
   @UseGuards(AuthGuard())
-  show(@Param("id", ParseIntPipe) id: number) {
-    return this.orderServ.show(id)
+  async show(@Req() request: IRequest, @Param("id", ParseIntPipe) id: number) {
+    const order = await this.orderServ.show(id)
+
+    if (!order.members.find(v => v.id === request.user.id)) {
+      // 如果这个人不在这个订单中，自动加入订单
+      await this.orderServ.addMember(id, request.user)
+    }
+
+    return order
   }
 
   @Put("/:id")

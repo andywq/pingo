@@ -5,7 +5,10 @@ const WechatAPI = require("../../apis/wechat")
 Page({
   onReady: async function () {
     const app = getApp()
-    if (app.globalData.account && app.globalData.account.name) {
+
+    await app.globalData.loginPromise
+
+    if (app.globalData.account.name) {
       wx.redirectTo({
         url: "/pages/index/index"
       })
@@ -25,6 +28,5 @@ Page({
     wx.navigateTo({
       url: "/pages/index/index"
     })
-
   }
 })

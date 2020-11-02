@@ -49,6 +49,7 @@ export class ProductService {
 
       await this.repo.save(p)
     } catch (err) {
+      console.error(err)
       throw new InternalServerErrorException(err)
     }
   }
@@ -66,6 +67,7 @@ export class ProductService {
         throw err
       }
 
+      console.error(err)
       throw new InternalServerErrorException(err)
     }
   }
