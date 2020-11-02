@@ -28,7 +28,7 @@ module.exports = {
       path: "/var/www/api.pingo.alexyan.cc",
       "pre-setup": "git reset --hard HEAD",
       "post-deploy":
-        "yarn && ln -sf ~/configs/pingo.json ./config/production.json && npm run prestart:prod && pm2 reload ecosystem.config.js --env production"
+        "cd server && yarn && ln -sf ~/configs/pingo.json ./config/production.json && npm run prestart:prod && pm2 reload ecosystem.config.js --env production"
     }
   }
 }
