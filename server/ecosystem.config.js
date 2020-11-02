@@ -23,7 +23,7 @@ module.exports = {
       user: "yanhao1991",
       host: "api.pingo.alexyan.cc",
       key: "~/.ssh/id_rsa",
-      ref: "origin/master",
+      ref: "origin/main",
       repo: "git@github.com:alexmaze/pingo.git",
       path: "/var/www/api.pingo.alexyan.cc",
       "pre-setup": "git reset --hard HEAD",
