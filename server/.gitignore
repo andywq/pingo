@@ -8,3 +8,4 @@ test.json
 .pm2/
 yarn.lock
 .data
+package-lock.json

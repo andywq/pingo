@@ -20,7 +20,7 @@ module.exports = {
 
   deploy: {
     production: {
-      user: "root",
+      user: "yanhao1991",
       host: "api.pingo.alexyan.cc",
       key: "~/.ssh/id_rsa",
       ref: "origin/master",
@@ -28,7 +28,7 @@ module.exports = {
       path: "/var/www/api.pingo.alexyan.cc",
       "pre-setup": "git reset --hard HEAD",
       "post-deploy":
-        "yarn && ln -sf /root/configs/pingo.json ./config/production.json && npm run prestart:prod && pm2 reload ecosystem.config.js --env production"
+        "yarn && ln -sf ~/configs/pingo.json ./config/production.json && npm run prestart:prod && pm2 reload ecosystem.config.js --env production"
     }
   }
 }
