@@ -6,7 +6,7 @@ Page({
   onReady: async function () {
     const app = getApp()
     if (app.globalData.account && app.globalData.account.name) {
-      wx.navigateTo({
+      wx.redirectTo({
         url: "/pages/index/index"
       })
       return
@@ -14,7 +14,8 @@ Page({
 
     const wechatUserInfo = await WechatAPI.getUserInfo()
     if (!wechatUserInfo) {
-      wx.navigateTo({
+      wx.nave
+      wx.redirectTo({
         url: "/pages/login/login"
       })
       return

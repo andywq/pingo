@@ -7,3 +7,7 @@
   align-items: center; */
   box-sizing: border-box;
 }
+
+input{
+  -webkit-user-select:text !important;
+}

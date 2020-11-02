@@ -22,7 +22,7 @@ Page({
   },
   afterGetInfo: function(info) {
     UserAPI.updateNameAvatar(info.nickName, info.avatarUrl)
-    wx.navigateTo({
+    wx.redirectTo({
       url: "/pages/index/index"
     })
   },

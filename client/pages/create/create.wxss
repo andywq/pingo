@@ -2,7 +2,9 @@
 page {
   color: #3d4785;
   background: #f3f8fe;
-  height: 100%;
+  position: relative;
+  z-index: 1;
+  /* height: 100%; */
 }
 
 .titlebar {
