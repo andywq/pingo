@@ -6,24 +6,28 @@
     </button>
   </view>
 
-  <view class="form">
-    <order-card type="clean" data="{{order}}" />
+  <view class="content {{isAddModalVisiable ? 'blur': ''}}">
+    <view class="form">
+      <order-card type="clean" data="{{order}}" />
 
-    <product-card wx:for="{{order.products}}" wx:key="index" data="{{item}}" index="{{index}}"
-      bindtap="handleTapProductCard" data-index="{{index}}" />
+      <product-card wx:for="{{order.products}}" wx:key="index" data="{{item}}" index="{{index}}"
+        bindtap="handleTapProductCard" data-index="{{index}}" />
 
-    <view class="actions" wx:if="{{order.status == 'open'}}">
-      <button class="add-btn" bindtap="handleAddProduct">添加商品</button>
+      <view class="actions" wx:if="{{order.status == 'open'}}">
+        <button class="add-btn" bindtap="handleAddProduct">添加商品</button>
+      </view>
+      <view class="actions" wx:if="{{order.status == 'closed'}}">
+        <button class="add-btn" bindtap="handleExportOrder">导出订单</button>
+      </view>
+
     </view>
-    <view class="actions" wx:if="{{order.status == 'closed'}}">
-      <button class="add-btn" bindtap="handleExportOrder">导出订单</button>
-    </view>
+
 
   </view>
+    <add-product-modal wx:if="{{order.status == 'open'}}" isOpen="{{isAddModalVisiable}}"
+      bindclose="handleCloseAddModal" bindsubmit="handleSubmitAddModal" />
+    <add-product-modal wx:if="{{order.status == 'open'}}" isOpen="{{isModifyModalVisiable}}"
+      bindclose="handleCloseModifyModal" bindsubmit="handleSubmitModifyModal" binddelete="handleDeleteModifyModal"
+      bindselect="handleSelectModifyModal" data="{{modifyProduct}}" />
+
 </view>
-
-
-<add-product-modal wx:if="{{order.status == 'open'}}" isOpen="{{isAddModalVisiable}}" bindclose="handleCloseAddModal" bindsubmit="handleSubmitAddModal" />
-<add-product-modal wx:if="{{order.status == 'open'}}" isOpen="{{isModifyModalVisiable}}" bindclose="handleCloseModifyModal"
-  bindsubmit="handleSubmitModifyModal" binddelete="handleDeleteModifyModal" bindselect="handleSelectModifyModal"
-  data="{{modifyProduct}}" />

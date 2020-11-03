@@ -79,6 +79,9 @@ Page({
     this.setData({
       isLoading: false
     })
+    wx.stopPullDownRefresh({
+      success: (res) => {},
+    })
     wx.hideLoading()
   },
   loadMoreOrders: async function () {

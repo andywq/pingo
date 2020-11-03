@@ -8,7 +8,7 @@
     <text class="title">拼购订单</text>
     <button class="add-btn {{isAddMenuVisiable ? 'open' : ''}}" bindtap="handleToggleAddMenu">+</button>
   </view>
-  <view class="list {{isAddMenuVisiable ? 'blur' : ''}}">
+  <view class="content {{isAddMenuVisiable ? 'blur' : ''}}">
 
     <order-card wx:for="{{orders}}" wx:key="index" data="{{item}}" index="{{index}}" bindtap="handleTapOrderCard"
       data-index="{{index}}" />

@@ -64,6 +64,9 @@ Page({
     }
 
     this.isLoading = false
+    wx.stopPullDownRefresh({
+      success: (res) => {},
+    })
     wx.hideLoading()
   },
 
