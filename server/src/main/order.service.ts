@@ -16,28 +16,40 @@ export class OrderService {
     @InjectRepository(OrderEntity)
     private readonly repo: Repository<OrderEntity>,
     @InjectRepository(ProductMemberEntity)
-    private readonly pmRepo: Repository<ProductMemberEntity>
+    private readonly pmRepo: Repository<ProductMemberEntity>,
+    @InjectRepository(AccountEntity)
+    private readonly accRepo: Repository<AccountEntity>
   ) {}
 
   async listByUserId(userId, skip, limit) {
-    let orders: OrderEntity[] = []
+    let ret: OrderEntity[] = []
     try {
-      orders = await this.repo
+      const orders = await this.repo
         .createQueryBuilder("order")
         .leftJoinAndSelect("order.creator", "c")
         .leftJoinAndSelect("order.members", "account")
         .where("account.id = :userId", { userId })
-        // .orderBy("order.cr", "DESC")
         .orderBy("order.created_at", "DESC")
         .skip(skip)
         .limit(limit)
+        .loadRelationIdAndMap("order.member_ids", "order.members")
+        // .loadRelationCountAndMap()
         .getMany()
+
+      // const ret = []
+      for (const o of orders) {
+        const mids = o["member_ids"]
+        const ms = await this.accRepo.findByIds(mids)
+        o.members = ms
+        ret.push(o)
+      }
+      // orders = orders.map()
     } catch (err) {
       console.error(err)
       throw new InternalServerErrorException(err)
     }
 
-    return orders
+    return ret
   }
 
   async join(user: AccountEntity, share_code: string) {
@@ -51,7 +63,7 @@ export class OrderService {
 
     try {
       await getManager().query(
-        "INSERT INTO order_members_account (order_id, account_id) VALUES ($1, $2)",
+        "INSERT INTO order_members_account (order_id, account_id) VALUES (?, ?)",
         [item.id, user.id]
       )
     } catch (err) {
@@ -152,19 +164,35 @@ export class OrderService {
   }
 
   async addMember(id: number, user: AccountEntity) {
+    const item = await this.repo.findOne(id)
+
+    if (item == null) {
+      throw new NotFoundException()
+    }
+
     try {
-      const order = await this.repo.findOne(id, {
-        relations: ["members"]
-      })
-
-      order.updated_at = new Date()
-      order.members.push(user)
-
-      await this.repo.save(order)
+      await getManager().query(
+        "INSERT INTO order_members_account (order_id, account_id) VALUES (?, ?)",
+        [item.id, user.id]
+      )
     } catch (err) {
       console.error(err)
-      throw new InternalServerErrorException(err)
     }
+
+    return
+    // try {
+    //   const order = await this.repo.findOne(id, {
+    //     relations: ["members"]
+    //   })
+
+    //   order.updated_at = new Date()
+    //   order.members.push(user)
+
+    //   await this.repo.save(order)
+    // } catch (err) {
+    //   console.error(err)
+    //   throw new InternalServerErrorException(err)
+    // }
   }
 
   async remove(id: number) {

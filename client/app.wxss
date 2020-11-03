@@ -44,7 +44,7 @@ page > .container > .titlebar>.title {
 page > .container > .titlebar>.title image {
   position: absolute;
   left: 0rpx;
-  top: 4rpx;
+  top: 6rpx;
   width: 40rpx;
   height: 40rpx;
 }
