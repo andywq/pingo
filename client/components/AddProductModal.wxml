@@ -49,8 +49,8 @@
 
   </view>
   <view class="actions">
-    <button class="close" bindtap="handleClose">取消</button>
-    <button wx:if="{{data}}" class="delete" bindtap="handleDelete">删除</button>
-    <button class="submit" bindtap="handleSubmit">确定</button>
+    <button class="close btn-hover-change" bindtap="handleClose">取消</button>
+    <button wx:if="{{data}}" class="delete btn-hover-change" bindtap="handleDelete">删除</button>
+    <button class="submit btn-hover-change" bindtap="handleSubmit">确定</button>
   </view>
 </view>

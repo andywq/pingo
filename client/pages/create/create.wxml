@@ -8,7 +8,7 @@
       <image src="/icons/plane.svg"></image>
       发起拼购
     </view>
-    <button class="submit-btn" bindtap="handleSubmit">
+    <button class="submit-btn btn-hover-change" bindtap="handleSubmit">
       <image class="img" src="/icons/check.svg"></image>
     </button>
   </view>
@@ -28,7 +28,7 @@
         bindtap="handleTapProductCard" data-index="{{index}}" />
 
       <view class="actions">
-        <button class="add-btn" bindtap="handleAddProduct">添加商品</button>
+        <button class="add-btn btn-hover-change" bindtap="handleAddProduct">添加商品</button>
       </view>
     </view>
 

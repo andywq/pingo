@@ -84,3 +84,11 @@ page > .container > .content.blur {
 input{
   -webkit-user-select:text !important;
 }
+
+.btn-hover-change {
+  opacity: 1;
+  transition: .2s all;
+}
+.btn-hover-change:hover {
+  opacity: 0.6;
+}

@@ -11,11 +11,11 @@
     </view>
 
     <!-- <text class="title">{{order.creator.name}} 发起的拼购订单</text> -->
-    <button wx:if="{{order.status == 'open'}}" class="close-btn" bindtap="handleClose">结束订单
+    <button wx:if="{{order.status == 'open'}}" class="close-btn btn-hover-change" bindtap="handleClose">结束订单
     </button>
   </view>
 
-  <view class="content {{isAddModalVisiable || isLoading ? 'blur': ''}}">
+  <view class="content {{isAddModalVisiable || isModifyModalVisiable || isLoading ? 'blur': ''}}">
     <view class="form">
       <order-card type="clean" data="{{order}}" />
 
@@ -23,10 +23,10 @@
         bindtap="handleTapProductCard" data-index="{{index}}" />
 
       <view class="actions" wx:if="{{order.status == 'open'}}">
-        <button class="add-btn" bindtap="handleAddProduct">添加商品</button>
+        <button class="add-btn btn-hover-change" bindtap="handleAddProduct">添加商品</button>
       </view>
       <view class="actions" wx:if="{{order.status == 'closed'}}">
-        <button class="add-btn" bindtap="handleExportOrder">导出订单</button>
+        <button class="add-btn btn-hover-change" bindtap="handleExportOrder">导出订单</button>
       </view>
 
     </view>

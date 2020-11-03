@@ -8,8 +8,11 @@
   position: relative;
   display: flex;
   flex-direction: column;
+  transition: .2s background;
 }
-
+.card:hover {
+  background: #f3f8fe;
+}
 .product {
   display: flex;
 }

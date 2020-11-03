@@ -6,6 +6,10 @@
   margin: 12rpx 0;
   box-shadow: 0 0 24rpx 0 #3e468533, 0rpx 10rpx 28rpx #3e468505 inset;
   flex-direction: column;
+  transition: .2s background;
+}
+.card:hover {
+  background: #f3f8fe;
 }
 .card.clean {
   box-shadow: none;

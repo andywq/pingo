@@ -12,9 +12,15 @@ Page({
     /** @type {Array<{name: string, products: Array<{name: string, desc: string}>}>} */
     orders: []
   },
-
+  handleContainerTap: function (e) {
+    if (this.data.isAddMenuVisiable && e.target.id !== "menu-btn") {
+      this.setData({
+        isAddMenuVisiable: false,
+      });
+    }
+  },
   // 菜单入口
-  handleToggleAddMenu: function () {
+  handleToggleAddMenu: function (e) {
     this.setData({
       isAddMenuVisiable: !this.data.isAddMenuVisiable,
     });
@@ -51,7 +57,7 @@ Page({
       menus: ['shareAppMessage', 'shareTimeline']
     })
   },
-  
+
   onShow: function () {
     this.refreshOrders()
   },

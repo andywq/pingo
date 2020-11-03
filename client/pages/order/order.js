@@ -161,17 +161,22 @@ Page({
     })
 
     if (this.data.id) {
-      // TODO 提交更新
-      wx.showLoading()
+      this.setData({
+        isLoading: true
+      })
+      // wx.showLoading()
       try {
         await OrderAPI.addProduct(this.data.id, v.detail)
       } catch (err) {
         console.error(err)
         wx.showToast({
-          title: '更新失败，请重试',
+          title: '更新失败',
         })
       }
-      wx.hideLoading()
+      // wx.hideLoading()
+      this.setData({
+        isLoading: false
+      })
       this.refresh()
     }
   },
@@ -196,16 +201,22 @@ Page({
     })
 
     try {
-      wx.showLoading()
+      this.setData({
+        isLoading: true
+      })
+      // wx.showLoading()
       await OrderAPI.updateProductInfo(this.data.id, v.detail.id, v.detail)
       await OrderAPI.updateMyProductSelectNumber(this.data.id, v.detail.id, v.detail._my_number)
     } catch (error) {
       console.error(error)
       wx.showToast({
-        title: '更新失败，请重试',
+        title: '更新失败',
       })
     }
-    wx.hideLoading()
+    this.setData({
+      isLoading: false
+    })
+    // wx.hideLoading()
     this.refresh()
   },
   handleDeleteModifyModal: async function (v) {
