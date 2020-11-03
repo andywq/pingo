@@ -1,10 +1,13 @@
 const apiEndpoint = "https://api.pingo.alexyan.cc/api/wechat";
 // const apiEndpoint = "http://127.0.0.1:8080/api/wechat"
 
-exports.fetch = function (method, url, data) {
+exports.fetch = async function (method, url, data) {
   const app = getApp();
-  const header = {};
+  if (method !== "POST" || url !== "/session/") {
+    await app.globalData.loginPromise
+  }
 
+  const header = {};
   if (method != "GET") {
     header["Content-Type"] = "application/json";
   }

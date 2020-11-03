@@ -34,15 +34,18 @@ Page({
     })
 
     try {
-      await wx.showLoading({mask: true})
+      // await wx.showLoading({mask: true})
       await OrderAPI.join(this.data.code)
     } catch (e) {
       wx.showToast({
-        title: '加入失败，请重试',
+        title: '加入失败',
       })
       return
     } finally {
-      wx.hideLoading()
+      // wx.hideLoading()
+      this.setData({
+        submitting: false
+      })
     }
 
     navigateBackOrIndex()
@@ -52,7 +55,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    const app = getApp()
+    console.log("dddd", app)
   },
 
   /**

@@ -1,0 +1,25 @@
+/* components/LoginAlert.wxss */
+button.login-alert {
+  width: 100%;
+  margin: 0;
+  background: #ffc069;
+  /* height: 68rpx; */
+  display: none;
+  font-size: 28rpx;
+  border-radius: 0;
+  font-weight: normal;
+  color: #fff;
+  padding: 24rpx;
+  position: relative;
+  padding-left: 76rpx;
+}
+button.login-alert.show {
+  display: flex;
+}
+button.login-alert image {
+  width: 34rpx;
+  height: 34rpx;
+  position: absolute;
+  left: 26rpx;
+  top: 12px;
+}

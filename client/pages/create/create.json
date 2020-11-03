@@ -1,6 +1,7 @@
 {
   "usingComponents": {
     "add-product-modal": "../../components/AddProductModal",
-    "product-card": "../../components/ProductCard"
+    "product-card": "../../components/ProductCard",
+    "loading": "/components/Loading"
   }
 }

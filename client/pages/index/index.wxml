@@ -1,18 +1,24 @@
 <!-- index.wxml -->
+<login-alert></login-alert>
 <view class="container">
-  <!-- <view class="userinfo">
-    <open-data type="userAvatarUrl"></open-data>
-    <open-data type="userNickName"></open-data>
-  </view> -->
+  <loading wx:if="{{isLoading}}" ></loading>
+
   <view class="titlebar">
-    <text class="title">拼购订单</text>
+    <view class="title">
+      <image src="/icons/box.svg"></image>
+        拼购订单
+    </view>
     <button class="add-btn {{isAddMenuVisiable ? 'open' : ''}}" bindtap="handleToggleAddMenu">+</button>
   </view>
-  <view class="content {{isAddMenuVisiable ? 'blur' : ''}}">
+  <view class="content {{isAddMenuVisiable || isLoading ? 'blur' : ''}}">
+    <view wx:if="{{!isLoading && orders.length === 0}}" class="empty-indicator">
+      <image src="/icons/empty.svg"></image>
+      <view>空空如也</view>
+    </view>
+
 
     <order-card wx:for="{{orders}}" wx:key="index" data="{{item}}" index="{{index}}" bindtap="handleTapOrderCard"
       data-index="{{index}}" />
-
   </view>
   <view class="add-menu {{isAddMenuVisiable ? 'open' : ''}}">
     <button bindtap="handleCreate">

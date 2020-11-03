@@ -68,7 +68,7 @@ Page({
       isLoading: true
     })
     try {
-      wx.showLoading()
+      // wx.showLoading()
       const orders = await OrderAPI.list(5, 0)
       this.setData({
         orders
@@ -82,7 +82,7 @@ Page({
     wx.stopPullDownRefresh({
       success: (res) => {},
     })
-    wx.hideLoading()
+    // wx.hideLoading()
   },
   loadMoreOrders: async function () {
     this.setData({

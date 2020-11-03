@@ -7,6 +7,8 @@ const {
 
 Page({
   data: {
+    submitting: false,
+
     title: "",
     products: [],
     // title: "QVM 拼水果",
@@ -30,8 +32,11 @@ Page({
 
   handleSubmit: async function () {
     try {
-      await wx.showLoading({
-        mask: true
+      // await wx.showLoading({
+      //   mask: true
+      // })
+      this.setData({
+        submitting: true
       })
       await OrderAPI.create({
         title: this.data.title,
@@ -46,7 +51,10 @@ Page({
       })
       return
     } finally {
-      wx.hideLoading()
+      // wx.hideLoading()
+      this.setData({
+        submitting: false
+      })
     }
 
   },

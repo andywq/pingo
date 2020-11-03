@@ -56,3 +56,17 @@ page > .container > .content {
   color: #b6b6b6;
   font-weight: 200;
 }
+
+.empty-indicator {
+  width: 100%;
+  text-align: center;
+  margin: 40rpx 0;
+}
+.empty-indicator image {
+  width: 100rpx;
+  height: 100rpx;
+}
+.empty-indicator view {
+  font-size: 28rpx;
+  color: #3e468533;
+}

@@ -1,10 +1,15 @@
 <!--pages/join/join.wxml-->
 <view class="container">
+  <loading wx:if="{{submitting}}" ></loading>
+
   <view class="titlebar">
-    <text class="title">加入拼购</text>
+    <view class="title">
+      <image src="/icons/link2.svg"></image>
+      加入拼购
+    </view>
   </view>
 
-  <view class="content">
+  <view class="content {{isAddMenuVisiable || submitting ? 'blur' : ''}}">
 
     <view class="desc">
       输入拼购订单号：

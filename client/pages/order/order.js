@@ -27,7 +27,6 @@ Page({
     })
   },
   onLoad: function (options) {
-    console.log(options)
     this.setData({
       "id": options.id
     })
@@ -40,8 +39,10 @@ Page({
   },
 
   refresh: async function () {
-    wx.showLoading()
-    this.isLoading = true
+    // wx.showLoading()
+    this.setData({
+      isLoading: true
+    })
 
     try {
       const order = await OrderAPI.show(this.data.id)
@@ -63,11 +64,13 @@ Page({
       console.log(error)
     }
 
-    this.isLoading = false
+    this.setData({
+      isLoading: false
+    })
     wx.stopPullDownRefresh({
       success: (res) => {},
     })
-    wx.hideLoading()
+    // wx.hideLoading()
   },
 
   handleClose: function () {

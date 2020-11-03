@@ -1,12 +1,21 @@
 <!--pages/order/order.wxml-->
 <view wx:if="{{!!order}}" class="container">
+
+  <loading wx:if="{{isLoading}}" ></loading>
+
   <view class="titlebar">
-    <text class="title">{{order.creator.name}} 发起的拼购订单</text>
+
+    <view class="title">
+      <image src="/icons/order.svg"></image>
+      拼购详情
+    </view>
+
+    <!-- <text class="title">{{order.creator.name}} 发起的拼购订单</text> -->
     <button wx:if="{{order.status == 'open'}}" class="close-btn" bindtap="handleClose">结束订单
     </button>
   </view>
 
-  <view class="content {{isAddModalVisiable ? 'blur': ''}}">
+  <view class="content {{isAddModalVisiable || isLoading ? 'blur': ''}}">
     <view class="form">
       <order-card type="clean" data="{{order}}" />
 
@@ -21,13 +30,12 @@
       </view>
 
     </view>
-
-
   </view>
-    <add-product-modal wx:if="{{order.status == 'open'}}" isOpen="{{isAddModalVisiable}}"
-      bindclose="handleCloseAddModal" bindsubmit="handleSubmitAddModal" />
-    <add-product-modal wx:if="{{order.status == 'open'}}" isOpen="{{isModifyModalVisiable}}"
-      bindclose="handleCloseModifyModal" bindsubmit="handleSubmitModifyModal" binddelete="handleDeleteModifyModal"
-      bindselect="handleSelectModifyModal" data="{{modifyProduct}}" />
+
+  <add-product-modal wx:if="{{order.status == 'open'}}" isOpen="{{isAddModalVisiable}}" bindclose="handleCloseAddModal"
+    bindsubmit="handleSubmitAddModal" />
+  <add-product-modal wx:if="{{order.status == 'open'}}" isOpen="{{isModifyModalVisiable}}"
+    bindclose="handleCloseModifyModal" bindsubmit="handleSubmitModifyModal" binddelete="handleDeleteModifyModal"
+    bindselect="handleSelectModifyModal" data="{{modifyProduct}}" />
 
 </view>

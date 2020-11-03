@@ -1,0 +1,5 @@
+<!--components/LoginAlert.wxml-->
+<button class="login-alert {{ isShow ? 'show' : ''}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo">
+  <image src="/icons/smile.svg"></image>
+  点击此处完善您的个人信息
+</button>

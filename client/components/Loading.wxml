@@ -1,0 +1,4 @@
+<!--components/Loading.wxml-->
+<view class="loading">
+  <image class="img" src="/icons/loading.svg"></image>
+</view>

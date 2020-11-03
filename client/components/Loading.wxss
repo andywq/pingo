@@ -1,0 +1,13 @@
+/* components/Loading.wxss */
+.loading {
+  width: 100%;
+  text-align: center;
+  position: absolute;
+  left: 0;
+  top: 160rpx;
+  z-index: 100;
+}
+.loading image {
+  width: 100rpx;
+  height: 100rpx;
+}
