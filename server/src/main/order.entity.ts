@@ -48,11 +48,11 @@ export class OrderEntity {
   )
   products: ProductEntity[]
 
-  @ManyToOne(type => AccountEntity, { cascade: false })
+  @ManyToOne(type => AccountEntity, { cascade: false, onDelete: "CASCADE" })
   @JoinColumn({ name: "creator_id" })
   creator: AccountEntity
 
-  @ManyToMany(type => AccountEntity, { cascade: false })
+  @ManyToMany(type => AccountEntity, { cascade: false, onDelete: "CASCADE" })
   @JoinTable({
     joinColumn: { name: "order_id" },
     inverseJoinColumn: { name: "account_id" }

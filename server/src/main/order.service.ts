@@ -1,20 +1,13 @@
 import {
   Injectable,
-  Inject,
   NotFoundException,
   InternalServerErrorException
 } from "@nestjs/common"
 import { InjectRepository } from "@nestjs/typeorm"
-import {
-  getManager,
-  Repository,
-  Transaction,
-  TransactionRepository
-} from "typeorm"
-import { IProduct, OrderEntity, OrderStatus } from "./order.entity"
+import { getManager, Repository } from "typeorm"
+import { OrderEntity, OrderStatus } from "./order.entity"
 import { AccountEntity } from "../account/account.entity"
 import { ProductEntity } from "./product.entity"
-import { ProductMemberService } from "./product_member.service"
 import { ProductMemberEntity } from "./product_member.entity"
 
 @Injectable()
@@ -48,18 +41,24 @@ export class OrderService {
   }
 
   async join(user: AccountEntity, share_code: string) {
-    const item = await this.repo.findOne(
-      {
-        share_code
-      },
-      {
-        relations: ["members"]
-      }
-    )
+    const item = await this.repo.findOne({
+      share_code
+    })
 
-    item.members.push(user)
+    if (item == null) {
+      throw new NotFoundException()
+    }
 
-    return this.repo.save(item)
+    try {
+      await getManager().query(
+        "INSERT INTO order_members_account (order_id, account_id) VALUES ($1, $2)",
+        [item.id, user.id]
+      )
+    } catch (err) {
+      console.error(err)
+    }
+
+    return
   }
 
   async create(user: AccountEntity, data: OrderEntity) {

@@ -50,7 +50,7 @@ Page({
       let total = 0
       for (const p of order.products) {
         for (const m of p.members) {
-          total += m.buy_number
+          total += m.buy_number * p.unit_price
         }
       }
       order.total = total
