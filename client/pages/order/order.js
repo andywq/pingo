@@ -183,6 +183,9 @@ Page({
 
   // 处理产品数据更新
   handleTapProductCard: function (v) {
+    if (this.data.order.status !== "open") {
+      return
+    }
     const product = this.data.order.products[v.target.dataset.index]
     this.setData({
       modifyProduct: product,
