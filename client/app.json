@@ -3,9 +3,7 @@
     "pages/index/index",
     "pages/create/create",
     "pages/join/join",
-    "pages/order/order",
-    "pages/login/login",
-    "pages/loading/loading"
+    "pages/order/order"
   ],
   "window": {
     "backgroundTextStyle": "light",

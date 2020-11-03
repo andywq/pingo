@@ -1,8 +1,0 @@
-/* pages/loading/loading.wxss */
-.loading {
-  margin: 100rpx;
-  text-align: center;
-}
-.loading image {
-  width: 200rpx;
-}
