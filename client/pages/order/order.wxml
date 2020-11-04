@@ -1,4 +1,5 @@
 <!--pages/order/order.wxml-->
+<login-alert></login-alert>
 <view wx:if="{{!!order}}" class="container">
 
   <loading wx:if="{{isLoading}}" ></loading>

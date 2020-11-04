@@ -3,7 +3,8 @@
     "add-product-modal": "../../components/AddProductModal",
     "loading": "/components/Loading",
     "product-card": "../../components/ProductCard",
-    "order-card": "/components/OrderCard"
+    "order-card": "/components/OrderCard",
+    "login-alert": "/components/LoginAlert"
   },
   "enablePullDownRefresh": true
 }
