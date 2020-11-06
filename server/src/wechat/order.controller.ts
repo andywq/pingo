@@ -5,13 +5,14 @@ import {
   Inject,
   Param,
   Delete,
-  Patch,
   ParseIntPipe,
   Post,
   Query,
   UseGuards,
   Req,
-  Put
+  Put,
+  Res,
+  HttpStatus
 } from "@nestjs/common"
 import { OrderEntity, OrderStatus } from "../main/order.entity"
 import { AuthGuard } from "@nestjs/passport"
@@ -20,11 +21,16 @@ import { IRequest } from "./interfaces"
 import { ProductService } from "../main/product.service"
 import { ProductMemberService } from "../main/product_member.service"
 import { ProductEntity } from "../main/product.entity"
+import { WechatService } from "./wechat.service"
+import { Response } from "express"
 
 @Controller("/api/wechat/order")
 export class OrderController {
   @Inject()
   orderServ: OrderService
+
+  @Inject()
+  wechatServ: WechatService
 
   @Inject()
   productServ: ProductService
@@ -60,7 +66,19 @@ export class OrderController {
 
   @Post("/")
   @UseGuards(AuthGuard())
-  create(@Req() request: IRequest, @Body() data: OrderEntity) {
+  async create(
+    @Req() request: IRequest,
+    @Res() response: Response,
+    @Body() data: OrderEntity
+  ) {
+    try {
+      const msgCheck = JSON.stringify(data)
+      await this.wechatServ.msgSecCheck(msgCheck)
+    } catch (err) {
+      response.status(HttpStatus.BAD_REQUEST).send("含违规内容，请修改后重试")
+      return
+    }
+
     return this.orderServ.create(request.user, data)
   }
 
@@ -85,7 +103,19 @@ export class OrderController {
 
   @Put("/:id")
   @UseGuards(AuthGuard())
-  update(@Param("id", ParseIntPipe) id, @Body() data: OrderEntity) {
+  async update(
+    @Res() response: Response,
+    @Param("id", ParseIntPipe) id,
+    @Body() data: OrderEntity
+  ) {
+    try {
+      const msgCheck = JSON.stringify(data)
+      await this.wechatServ.msgSecCheck(msgCheck)
+    } catch (err) {
+      response.status(HttpStatus.BAD_REQUEST).send("含违规内容，请修改后重试")
+      return
+    }
+
     data.id = id
     return this.orderServ.update(data)
   }
@@ -108,19 +138,37 @@ export class OrderController {
   @Post("/:id/product")
   @UseGuards(AuthGuard())
   async addProduct(
+    @Res() response: Response,
     @Param("id", ParseIntPipe) id: number,
     @Body() data: ProductEntity
   ) {
+    try {
+      const msgCheck = JSON.stringify(data)
+      await this.wechatServ.msgSecCheck(msgCheck)
+    } catch (err) {
+      response.status(HttpStatus.BAD_REQUEST).send("含违规内容，请修改后重试")
+      return
+    }
+
     return this.productServ.create(id, data)
   }
 
   @Put("/:id/product/:productId")
   @UseGuards(AuthGuard())
-  updateProduct(
+  async updateProduct(
+    @Res() response: Response,
     @Param("id", ParseIntPipe) id: number,
     @Param("productId", ParseIntPipe) productId: number,
     @Body() data: ProductEntity
   ) {
+    try {
+      const msgCheck = JSON.stringify(data)
+      await this.wechatServ.msgSecCheck(msgCheck)
+    } catch (err) {
+      response.status(HttpStatus.BAD_REQUEST).send("含违规内容，请修改后重试")
+      return
+    }
+
     return this.productServ.update(data)
   }
 

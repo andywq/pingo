@@ -170,7 +170,7 @@ Page({
       } catch (err) {
         console.error(err)
         wx.showToast({
-          title: '更新失败',
+          title: err,
         })
       }
       // wx.hideLoading()
@@ -213,7 +213,7 @@ Page({
     } catch (error) {
       console.error(error)
       wx.showToast({
-        title: '更新失败',
+        title: error,
       })
     }
     this.setData({

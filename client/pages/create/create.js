@@ -46,7 +46,7 @@ Page({
       navigateBackOrIndex()
     } catch (e) {
       wx.showToast({
-        title: '提交失败请重试',
+        title: e,
         icon: "none"
       })
       return

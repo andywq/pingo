@@ -11,6 +11,7 @@ import { OrderController } from "./order.controller"
 import { OrderService } from "../main/order.service"
 import { ProductService } from "../main/product.service"
 import { ProductMemberService } from "../main/product_member.service"
+import { WechatService } from "./wechat.service"
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { ProductMemberService } from "../main/product_member.service"
     AuthService,
     JwtStrategy,
     OrderService,
+    WechatService,
     ProductService,
     ProductMemberService
   ],
