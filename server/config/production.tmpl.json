@@ -13,5 +13,9 @@
   "jwt": {
     "expiresIn": "2h",
     "secret": "123"
+  },
+  "wechat": {
+    "appId": "xx",
+    "appSecret": "ddd"
   }
 }
