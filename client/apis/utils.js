@@ -1,5 +1,5 @@
-// const apiEndpoint = "https://api.pingo.alexyan.cc/api/wechat";
-const apiEndpoint = "http://127.0.0.1:8080/api/wechat"
+const apiEndpoint = "https://api.pingo.alexyan.cc/api/wechat";
+// const apiEndpoint = "http://127.0.0.1:8080/api/wechat"
 
 exports.fetch = async function (method, url, data) {
   const app = getApp();
