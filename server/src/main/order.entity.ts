@@ -66,5 +66,5 @@ export interface IProduct {
   desc: string
   unit_price: number
   select_mode: string
-  members: AccountEntity
+  members: AccountEntity[]
 }

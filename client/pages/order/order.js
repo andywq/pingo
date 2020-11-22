@@ -68,7 +68,7 @@ Page({
       isLoading: false
     })
     wx.stopPullDownRefresh({
-      success: (res) => {},
+      success: (res) => { },
     })
     // wx.hideLoading()
   },
@@ -99,10 +99,18 @@ Page({
     })
   },
 
-  handleExportOrder: function () {
-    console.log("export")
-    // TODO 获取数据
-    const data = "sadfsadfsa"
+  handleExportOrder: async function () {
+    let data
+    try {
+      data = await OrderAPI.export(this.data.id)
+    } catch (err) {
+      console.log(err)
+      wx.showToast({
+        icon: "none",
+        title: '导出失败',
+      })
+    }
+    console.log(data)
 
     const fileName = `拼购_${this.data.order.title}_${new Date().getTime()}.csv`
 

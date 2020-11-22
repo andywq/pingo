@@ -19,6 +19,14 @@ module.exports = class OrderAPI {
   }
 
   /**
+   * 获取订单详情
+   * @param {string} id 
+   */
+  static export(id) {
+    return fetch("GET", `/order/${id}/export`)
+  }
+
+  /**
    * 创建拼购订单
    * @param {{name: string, products: Array<{name: string, desc: string, unit_price: number, select_mode: string}>}} order 
    * @returns {Promise<void>}

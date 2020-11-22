@@ -16,6 +16,7 @@
         ￥{{data.unit_price}}
       </view>
       <view class="select_mode">
+        {{totalNumber}}
         {{data.select_mode == "int" ? "整" : ""}}
         {{data.select_mode == "float" ? "散" : ""}}
       </view>

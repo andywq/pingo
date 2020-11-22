@@ -14,7 +14,7 @@ import {
   Res,
   HttpStatus
 } from "@nestjs/common"
-import { OrderEntity, OrderStatus } from "../main/order.entity"
+import { OrderEntity, OrderStatus, IProduct } from "../main/order.entity"
 import { AuthGuard } from "@nestjs/passport"
 import { OrderService } from "../main/order.service"
 import { IRequest } from "./interfaces"
@@ -79,7 +79,15 @@ export class OrderController {
       return
     }
 
-    return this.orderServ.create(request.user, data)
+    try {
+      await this.orderServ.create(request.user, data)
+    } catch (err) {
+      response.status(HttpStatus.INTERNAL_SERVER_ERROR).send(err)
+      return
+    }
+
+    response.status(HttpStatus.CREATED).send()
+    return
   }
 
   @Post("/join")
@@ -101,6 +109,84 @@ export class OrderController {
     return order
   }
 
+  @Get("/:id/export")
+  @UseGuards(AuthGuard())
+  async export(
+    @Param("id", ParseIntPipe) id: number,
+    @Res() response: Response
+  ) {
+    const order = await this.orderServ.show(id)
+
+    const csv = []
+    csv.push(["ID", order.id].join(","))
+    csv.push(["主题", order.title].join(","))
+    csv.push(["拼单号", order.share_code].join(","))
+    csv.push(["发起时间", order.created_at.toLocaleDateString()].join(","))
+    csv.push(["发起人", order.creator.name].join(","))
+    csv.push("")
+    csv.push("")
+
+    {
+      const table = []
+      const members = order.members
+      const products = order.products
+      const lineOffset = 6 // 前6行保留给商品信息
+      const columnOffset = 1 // 第1列保留给成员名称
+
+      // 初始化商品信息行
+      table[0] = ["商品"]
+      table[1] = ["描述"]
+      table[2] = ["单价"]
+      table[3] = ["总数"]
+      table[4] = ["总价"]
+      table[5] = []
+
+      // 初始化行，成员
+      for (let i = 0; i < members.length; i++) {
+        const index = i + lineOffset
+        const m = members[i]
+
+        table[index] = []
+        table[index][0] = m.name
+      }
+
+      // 初始化列，商品
+      for (let i = 0; i < products.length; i++) {
+        const index = i + columnOffset
+        const p = products[i] as any
+
+        table[0][index] = p.name
+        table[1][index] = p.desc
+        table[2][index] = p.unit_price
+
+        let totalNumber = 0
+        let totalPrice = 0
+
+        for (const m of p.members) {
+          // 成员在 table 中行号
+          const mIndex =
+            members.findIndex(v => v.id === m.account.id) + lineOffset
+          table[mIndex][index] = m.buy_number
+
+          totalNumber += m.buy_number
+          totalPrice += m.buy_number * p.unit_price
+        }
+
+        table[3][index] = parseFloat(totalNumber.toFixed(4))
+        table[4][index] = parseFloat(totalPrice.toFixed(4))
+      }
+
+      for (const line of table) {
+        csv.push(line.join(","))
+      }
+    }
+
+    response
+      .status(HttpStatus.OK)
+      .contentType("application/csv;charset=utf-8")
+      .send(csv.join("\n"))
+  }
+
   @Put("/:id")
   @UseGuards(AuthGuard())
   async update(
@@ -116,8 +202,16 @@ export class OrderController {
       return
     }
 
-    data.id = id
-    return this.orderServ.update(data)
+    try {
+      data.id = id
+      await this.orderServ.update(data)
+    } catch (err) {
+      response.status(HttpStatus.INTERNAL_SERVER_ERROR).send(err)
+      return
+    }
+
+    response.status(HttpStatus.OK).send()
+    return
   }
 
   @Delete("/:id")
@@ -150,7 +244,15 @@ export class OrderController {
       return
     }
 
-    return this.productServ.create(id, data)
+    try {
+      await this.productServ.create(id, data)
+    } catch (err) {
+      response.status(HttpStatus.INTERNAL_SERVER_ERROR).send(err)
+      return
+    }
+
+    response.status(HttpStatus.OK).send()
+    return
   }
 
   @Put("/:id/product/:productId")
@@ -169,7 +271,15 @@ export class OrderController {
       return
     }
 
-    return this.productServ.update(data)
+    try {
+      await this.productServ.update(data)
+    } catch (err) {
+      response.status(HttpStatus.INTERNAL_SERVER_ERROR).send(err)
+      return
+    }
+
+    response.status(HttpStatus.OK).send()
+    return
   }
 
   @Delete("/:id/product/:productId")
