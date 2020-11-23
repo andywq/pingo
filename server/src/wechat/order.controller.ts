@@ -147,7 +147,7 @@ export class OrderController {
         const m = members[i]
 
         table[index] = []
-        table[index][0] = m.name
+        table[index][0] = m.name || `未认证${m.wx_open_id}`
       }
 
       // 初始化列，商品
@@ -177,6 +177,10 @@ export class OrderController {
       }
 
       for (const line of table) {
+        if (line.filter((_, i) => i !== 0).length === 0) {
+          continue
+        }
+
         csv.push(line.join(","))
       }
     }

@@ -46,7 +46,7 @@ export class WechatService {
     )
 
     const { errcode, errMsg } = resp.data
-    if (errcode) {
+    if (errcode && errMsg) {
       const err = new Error(`[WechatService] 内容不合法 ${errcode} ${errMsg}`)
       console.error(err)
       throw err
@@ -74,7 +74,7 @@ class AccessTokenManager {
     })
 
     const { access_token, expires_in, errcode, errmsg } = resp.data
-    if (errcode) {
+    if (errcode && errmsg) {
       const err = new Error(
         `[AccessTokenManager] failed to get wechat access_token ${errcode} ${errmsg}`
       )

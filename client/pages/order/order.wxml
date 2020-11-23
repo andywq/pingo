@@ -2,7 +2,7 @@
 <login-alert></login-alert>
 <view wx:if="{{!!order}}" class="container">
 
-  <loading wx:if="{{isLoading}}" ></loading>
+  <loading wx:if="{{isLoading}}"></loading>
 
   <view class="titlebar">
 
@@ -23,13 +23,11 @@
       <product-card wx:for="{{order.products}}" wx:key="index" data="{{item}}" index="{{index}}"
         bindtap="handleTapProductCard" data-index="{{index}}" />
 
-      <view class="actions" wx:if="{{order.status == 'open'}}">
-        <button class="add-btn btn-hover-change" bindtap="handleAddProduct">添加商品</button>
-      </view>
-      <view class="actions" wx:if="{{order.status == 'closed'}}">
+      <view class="actions">
+        <button wx:if="{{order.status == 'open'}}" class="add-btn btn-hover-change"
+          bindtap="handleAddProduct">添加商品</button>
         <button class="add-btn btn-hover-change" bindtap="handleExportOrder">导出订单</button>
       </view>
-
     </view>
   </view>
 
