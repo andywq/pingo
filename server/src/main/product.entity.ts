@@ -18,7 +18,7 @@ export class ProductEntity {
   @Column()
   desc: string
 
-  @Column()
+  @Column({ type: "double" })
   unit_price: number
 
   @Column()

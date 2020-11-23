@@ -240,6 +240,7 @@ export class OrderController {
       const msgCheck = JSON.stringify(data)
       await this.wechatServ.msgSecCheck(msgCheck)
     } catch (err) {
+      console.log(err)
       response.status(HttpStatus.BAD_REQUEST).send("含违规内容，请修改后重试")
       return
     }
