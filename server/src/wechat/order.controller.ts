@@ -300,6 +300,10 @@ export class OrderController {
     @Param("productId", ParseIntPipe) productId: number,
     @Body() data: { buy_number: number }
   ) {
+    if (data.buy_number === 0) {
+      return this.productMemberServ.remove(productId, request.user.id)
+    }
+
     return this.productMemberServ.createOrUpdate(
       id,
       productId,
