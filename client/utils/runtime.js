@@ -733,7 +733,7 @@ var runtime = (function (exports) {
 ));
 
 try {
-  regeneratorRuntime = runtime;
+  var regeneratorRuntime = runtime;
 } catch (accidentalStrictMode) {
   // This module should not be running in strict mode, so the above
   // assignment should always work unless something is misconfigured. Just
@@ -744,5 +744,6 @@ try {
   // you've misconfigured your bundler to force strict mode and applied a
   // CSP to forbid Function, and you're not willing to fix either of those
   // problems, please detail your unique predicament in a GitHub issue.
+  console.error(accidentalStrictMode)
   Function("r", "regeneratorRuntime = r")(runtime);
 }

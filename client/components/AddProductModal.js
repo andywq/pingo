@@ -112,6 +112,10 @@ Component({
             this.setData({
               buy_number: m.buy_number
             })
+          } else {
+            this.setData({
+              buy_number: 0
+            })
           }
         }
 
