@@ -1,4 +1,5 @@
 const { fetch } = require("./utils")
+const regeneratorRuntime = require("../utils/runtime");
 
 module.exports = class OrderAPI {
   /**

@@ -2,6 +2,7 @@ const OrderAPI = require("../../apis/order")
 const {
   navigateBackOrIndex
 } = require("../../utils/util")
+const regeneratorRuntime = require("../../utils/runtime");
 
 Page({
   data: {

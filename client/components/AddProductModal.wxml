@@ -23,7 +23,7 @@
     <view class="form-item">
       <view class="form-item-title">商品单价：</view>
       <view class="form-item-content">
-        <input type="number" value="{{product.unit_price}}" bindblur="handleUnitPriceInput"
+        <input type="digit" value="{{product.unit_price}}" bindblur="handleUnitPriceInput"
           placeholder-class="form-item-input-placeholder" placeholder="如 18.6" />
       </view>
     </view>
@@ -42,7 +42,7 @@
     <view wx:if="{{data}}"  class="form-item" wx:if="{{data}}">
       <view class="form-item-title">我的购买数量：</view>
       <view class="form-item-content">
-        <input type="number" value="{{buy_number}}" bindblur="handleMyNumberInput"
+        <input type="digit" value="{{buy_number}}" bindblur="handleMyNumberInput"
           placeholder-class="form-item-input-placeholder" placeholder="购买数量" />
       </view>
     </view>

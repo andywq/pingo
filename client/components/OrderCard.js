@@ -1,6 +1,7 @@
 const {
   formatTime
 } = require("../utils/util")
+const regeneratorRuntime = require("../utils/runtime");
 
 // components/OrderCard.js
 Component({

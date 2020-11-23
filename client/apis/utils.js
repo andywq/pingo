@@ -1,5 +1,6 @@
 const apiEndpoint = "https://api.pingo.alexyan.cc/api/wechat";
 // const apiEndpoint = "http://127.0.0.1:8080/api/wechat"
+const regeneratorRuntime = require("../utils/runtime");
 
 exports.fetch = async function (method, url, data) {
   const app = getApp();

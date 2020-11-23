@@ -1,4 +1,5 @@
 
+const regeneratorRuntime = require("../utils/runtime");
 module.exports = class WechatAPI {
   /**
    * @returns {Promise<{code: string}>}

@@ -1,5 +1,6 @@
 const UserAPI = require("./apis/user")
 const WechatAPI = require("./apis/wechat")
+const regeneratorRuntime = require("./utils/runtime");
 
 //app.js
 App({

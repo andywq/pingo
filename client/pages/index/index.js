@@ -1,6 +1,7 @@
 //index.js
 
 const OrderAPI = require("../../apis/order");
+const regeneratorRuntime = require("../../utils/runtime");
 
 //获取应用实例
 const app = getApp();

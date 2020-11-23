@@ -1,4 +1,5 @@
 // components/ProductCard.js
+const regeneratorRuntime = require("../utils/runtime");
 Component({
   properties: {
     index: {

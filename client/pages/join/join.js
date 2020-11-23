@@ -1,5 +1,6 @@
 const { sleep, navigateBackOrIndex } = require("../../utils/util");
 const OrderAPI = require("../../apis/order");
+const regeneratorRuntime = require("../../utils/runtime");
 
 // pages/join/join.js
 Page({

@@ -1,4 +1,5 @@
 // components/AddProductModal.js
+const regeneratorRuntime = require("../utils/runtime");
 
 //获取应用实例
 const app = getApp();

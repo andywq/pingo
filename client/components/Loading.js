@@ -1,4 +1,5 @@
 // components/Loading.js
+const regeneratorRuntime = require("../utils/runtime");
 Component({
   /**
    * 组件的属性列表

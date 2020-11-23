@@ -1,5 +1,6 @@
 // components/LoginAlert.js
 const UserAPI = require("../apis/user")
+const regeneratorRuntime = require("../utils/runtime");
 
 Component({
   data: {
